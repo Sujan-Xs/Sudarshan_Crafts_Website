@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #F8F4EE;
+    color: #1E1A17;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom high-end scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F8F4EE;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #9A7652;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4A3728;
+  }
+}
+
+@layer components {
+  /* Premium ultra-subtle grain texture overlay */
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    opacity: 0.022; /* extremely subtle for luxury look */
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  /* Custom text styles */
+  .text-luxury-serif {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-weight: 300;
+  }
+
+  .text-luxury-sans {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* Editorial thin lines */
+  .luxury-divider {
+    border-color: rgba(156, 123, 82, 0.15); /* Warm bronze tint */
+  }
+
+  .luxury-divider-dark {
+    border-color: rgba(231, 222, 209, 0.1); /* Sandstone tint on dark sections */
+  }
+
+  /* Customized aspect boxes to mimic exquisite stone textures */
+  .stone-placeholder-marble {
+    background: linear-gradient(135deg, #f3ede2 0%, #e0d6c4 50%, #eae0d0 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .stone-placeholder-marble::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
+    transform: rotate(30deg);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .stone-placeholder-sandstone {
+    background: linear-gradient(135deg, #e3d5c1 0%, #cebfab 50%, #ded0bb 100%);
+    position: relative;
+  }
+  
+  .stone-placeholder-granite {
+    background: linear-gradient(135deg, #d2c8b9 0%, #b8ad9c 100%);
+    position: relative;
+  }
+
+  .stone-placeholder-dark {
+    background: linear-gradient(135deg, #2a2a24 0%, #171714 100%);
+    position: relative;
+  }
+
+  /* Smooth reveal animation for titles */
+  .char-reveal {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
+  /* Horizontal scrolling custom styling */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
