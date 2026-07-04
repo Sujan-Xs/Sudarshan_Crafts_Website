@@ -78,9 +78,9 @@ export default function ContactForm() {
             <div className="flex items-start space-x-4">
               <MapPin className="w-4 h-4 text-brand-bronze stroke-[1.5] mt-0.5" />
               <div>
-                <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Atelier & Studio</span>
+                <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Sudarshan Crafts Museum</span>
                 <span className="text-xs text-white/90 font-light mt-1 block">
-                  12, Heritage Quarry Road, Mansarovar,<br />Jaipur, Rajasthan, 302020, India
+                  Station Road<br />Puri- 752002, Odisha, India
                 </span>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function ContactForm() {
               <div>
                 <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Gallery Viewings</span>
                 <span className="text-xs text-white/90 font-light mt-1 block">
-                  Strictly by prior private appointment only.<br />Monday — Saturday: 10:00 to 18:00
+                  Strictly by prior private appointment only.<br />Monday — Saturday: 07:00am to 05:00pm
                 </span>
               </div>
             </div>
@@ -110,7 +110,7 @@ export default function ContactForm() {
               <div>
                 <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Telephonic Line</span>
                 <a href="tel:+911412789988" className="text-xs text-white hover:text-brand-bronze transition-colors mt-1 block font-light">
-                  +91 141 278 9988
+                  +06725 220474
                 </a>
               </div>
             </div>
@@ -118,7 +118,7 @@ export default function ContactForm() {
           </div>
 
           <div className="text-[9px] tracking-[0.25em] text-brand-grey uppercase font-light border-t border-brand-sand/10 pt-6">
-            <span>SUDARSHAN CRAFTS ATELIER © 2026</span>
+            <span>SUDARSHAN CRAFTS MUSEUM © 2026</span>
           </div>
 
         </div>
