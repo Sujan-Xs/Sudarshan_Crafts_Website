@@ -1,6 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Eye, Map } from 'lucide-react';
+import { usePhotos } from '../hooks/usePhotos';
+import { bulkGalleryItems } from '../gallery_data';
 
 const inspirationItems = [
   {
@@ -8,58 +10,123 @@ const inspirationItems = [
     title: "Bel Air Luxury Sanctuary Foyer",
     description: "Our monumental Vinayaka in pure White Makrana Marble stands as a breathtaking centerpiece under a grand 6-meter skylit foyer.",
     location: "Los Angeles, CA",
-    image: "/images/ganesha.png",
+    statueName: "Vinayaka in White Makrana Marble",
+    material: "Makrana Marble",
     placeholderClass: "stone-placeholder-marble",
-    heightClass: "h-[360px]"
+    heightClass: "h-[360px]",
+    category: "Stone Sculpture"
   },
   {
     id: 2,
     title: "Kyoto Zen Reflection Courtyard",
     description: "A dark basalt Dhyana Shiva sculpture integrated within a minimalist dry stone and moss garden, invoking profound cosmic stillness.",
     location: "Kyoto, Japan",
-    image: "/images/shiva.png",
+    statueName: "Dhyana Shiva in Dark Basalt",
+    material: "Dark Basalt",
     placeholderClass: "stone-placeholder-granite",
-    heightClass: "h-[460px]"
+    heightClass: "h-[460px]",
+    category: "Stone Sculpture"
   },
   {
     id: 3,
     title: "Zurich Wellness Resort Lobby",
     description: "A bespoke backlit Alabaster custom installation casting warm, tranquil geometric shadow patterns across an elite alpine spa lobby.",
     location: "Zurich, Switzerland",
+    statueName: "Backlit Alabaster Mandala",
+    material: "Alabaster",
     placeholderClass: "stone-placeholder-dark",
-    heightClass: "h-[300px]"
+    heightClass: "h-[300px]",
+    category: "Stone Sculpture"
   },
   {
     id: 4,
     title: "Udaipur Heritage Villa Courtyard",
     description: "An intricate Gaja Lakshmi pink sandstone sculpture framing a heritage archway, set next to a quiet water-reflection pool.",
     location: "Rajasthan, India",
+    statueName: "Gaja Lakshmi in Pink Sandstone",
+    material: "Pink Sandstone",
     placeholderClass: "stone-placeholder-sandstone",
-    heightClass: "h-[380px]"
+    heightClass: "h-[380px]",
+    category: "Stone Sculpture"
   },
   {
     id: 5,
     title: "New Delhi Penthouse Puja Atrium",
     description: "A gorgeous Radha Krishna sandstone relief situated in a spiritual corner of a modern penthouse, interacting with daylong soft natural light.",
     location: "New Delhi, India",
-    image: "/images/radha_krishna.png",
+    statueName: "Radha Krishna Sandstone Relief",
+    material: "Sandstone",
     placeholderClass: "stone-placeholder-sandstone",
-    heightClass: "h-[420px]"
+    heightClass: "h-[420px]",
+    category: "Stone Sculpture"
   },
   {
     id: 6,
     title: "Mallorca Meditation Pavilion",
     description: "A serene beige sandstone Nirvana Buddha placed under an open-air stone pavilion, overlooking the infinite calm of the Mediterranean Sea.",
     location: "Mallorca, Spain",
+    statueName: "Nirvana Buddha in Beige Sandstone",
+    material: "Beige Sandstone",
     placeholderClass: "stone-placeholder-marble",
-    heightClass: "h-[330px]"
+    heightClass: "h-[330px]",
+    category: "Stone Sculpture"
+  },
+  {
+    id: 7,
+    title: "Bali Tropical Estate Veranda",
+    description: "A deeply textured Neem wood carving depicting heritage motifs, effortlessly blending with the lush tropical surroundings of an open-air veranda.",
+    location: "Bali, Indonesia",
+    statueName: "Neem Wood Heritage Carving",
+    material: "Neem Wood",
+    placeholderClass: "stone-placeholder-sandstone",
+    heightClass: "h-[320px]",
+    category: "Wooden Sculpture"
+  },
+  {
+    id: 8,
+    title: "Dubai Skyline Penthouse",
+    description: "A gleaming bronze monumental casting that catches the golden hour light, reflecting the opulent surroundings of a modern desert metropolis.",
+    location: "Dubai, UAE",
+    statueName: "Bronze Monumental Casting",
+    material: "Bronze",
+    placeholderClass: "stone-placeholder-granite",
+    heightClass: "h-[400px]",
+    category: "Metal Work"
   }
 ];
 
+const categories = ['All', 'Stone Sculpture', 'Wooden Sculpture', 'Metal Work', 'Fiber Glass', 'Paintings'];
+
 export default function InteriorInspiration() {
+  const [activeCategory, setActiveCategory] = useState('All');
+  const { statues: customStatues } = usePhotos();
+
+  // Map custom statues to match the inspirationItems schema
+  const mappedCustomStatues = customStatues.map((statue, idx) => ({
+    id: `custom-${statue.id}`,
+    statueName: statue.statueName,
+    material: statue.material || "Custom Material",
+    description: statue.description,
+    image: statue.image,
+    title: "Custom Placement",
+    location: "Gallery Collection",
+    placeholderClass: "stone-placeholder-marble", // default fallback
+    heightClass: idx % 2 === 0 ? "h-[380px]" : "h-[460px]",
+    category: "Stone Sculpture" // Default to stone sculpture so it shows up in a category
+  }));
+
+  // Safely integrate bulk items if they exist
+  const safeBulkItems = typeof bulkGalleryItems !== 'undefined' ? bulkGalleryItems : [];
+
+  const allItems = [...safeBulkItems, ...mappedCustomStatues];
+
+  const filteredItems = allItems.filter(item =>
+    activeCategory === 'All' || item.category === activeCategory
+  );
+
   return (
-    <section 
-      id="inspirations" 
+    <section
+      id="inspirations"
       className="py-24 md:py-36 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden"
     >
       {/* Section Header */}
@@ -85,92 +152,97 @@ export default function InteriorInspiration() {
         </div>
       </div>
 
-      {/* Modern Pinterest Masonry Column Grid */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
-        {inspirationItems.map((item) => (
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            key={item.id}
-            className="break-inside-avoid group relative border border-brand-bronze/10 overflow-hidden bg-brand-sand/15 transition-all duration-500 hover:border-brand-bronze/35 hover:shadow-lg flex flex-col"
+      {/* Filter Options */}
+      <div className="flex flex-wrap gap-6 mb-16 items-center justify-center lg:justify-start">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            className={`text-xs uppercase tracking-[0.2em] font-light pb-2 transition-all duration-300 relative ${activeCategory === category
+                ? 'text-brand-bronze font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-brand-bronze'
+                : 'text-brand-grey hover:text-brand-charcoal'
+              }`}
           >
-            {/* Fine boundary borders */}
-            <div className="absolute top-4 left-4 right-4 bottom-4 border border-brand-bronze/5 pointer-events-none transition-all duration-500 group-hover:border-brand-bronze/15 z-20" />
-
-            {/* Content Area with specified heights */}
-            <div className={`w-full ${item.heightClass} relative overflow-hidden flex items-center justify-center`}>
-              
-              {/* Stone themed textured container or actual image */}
-              {item.image ? (
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-[2.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-103"
-                />
-              ) : (
-                <div className={`w-full h-full ${item.placeholderClass} transition-transform duration-[2.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-103`}>
-                  {/* Visual shadow / lighting map */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-charcoal/25 via-transparent to-white/15 pointer-events-none" />
-                  
-                  {/* Minimal abstract sculptural line indicators */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-40">
-                    <div className="w-14 h-14 border border-brand-bronze/15 rounded-full flex items-center justify-center">
-                      <div className="w-8 h-8 border border-brand-bronze/20 rounded-md rotate-12" />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Luxury Blur Overlay with Editorial Narrative */}
-              <div className="absolute inset-0 bg-brand-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-between p-8 z-10">
-                
-                {/* Header in Overlay */}
-                <div className="flex justify-between items-start text-[8px] tracking-[0.25em] text-brand-bronze uppercase">
-                  <span>Placements Spec</span>
-                  <span className="flex items-center">
-                    <Map className="w-2.5 h-2.5 mr-1" />
-                    {item.location}
-                  </span>
-                </div>
-
-                {/* Body details in Overlay */}
-                <div className="space-y-3">
-                  <h3 className="text-xl font-serif text-white font-light">
-                    {item.title}
-                  </h3>
-                  <div className="w-8 h-[1px] bg-brand-bronze" />
-                  <p className="text-[11px] text-brand-sand/80 font-light leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-
-                {/* Footer in Overlay */}
-                <div className="text-[8px] tracking-[0.2em] uppercase text-white/50 border-t border-white/10 pt-2 flex items-center space-x-1.5 self-start">
-                  <Eye className="w-3.5 h-3.5 text-brand-bronze" />
-                  <span>Inspect Space Layout</span>
-                </div>
-
-              </div>
-            </div>
-
-            {/* Caption beneath images when not hovered (for mobile & screen completeness) */}
-            <div className="p-5 border-t border-brand-bronze/10 flex justify-between items-center bg-brand-bg/50">
-              <div>
-                <h4 className="text-xs uppercase tracking-[0.2em] font-medium text-brand-charcoal">
-                  {item.title}
-                </h4>
-                <p className="text-[10px] text-brand-grey font-light mt-0.5">{item.location}</p>
-              </div>
-              <span className="text-[9px] tracking-[0.1em] text-brand-bronze italic font-serif">
-                0{item.id}
-              </span>
-            </div>
-
-          </motion.div>
+            {category}
+          </button>
         ))}
       </div>
+
+      {/* Modern Pinterest Masonry Column Grid or Empty State */}
+      {filteredItems.length > 0 ? (
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8 min-h-[400px]">
+          {filteredItems.map((item) => (
+            <div
+              key={item.id}
+              className={`relative group overflow-hidden w-full ${!item.image ? (item.heightClass || 'h-[400px]') : ''} ${!item.image ? item.placeholderClass : ''} break-inside-avoid border border-brand-bronze/10 bg-brand-sand/15 transition-all duration-500 hover:border-brand-bronze/35 hover:shadow-lg`}
+            >
+              {/* Fine boundary borders */}
+              <div className="absolute top-4 left-4 right-4 bottom-4 border border-brand-bronze/5 pointer-events-none transition-all duration-500 group-hover:border-brand-bronze/15 z-20" />
+
+              {/* Content Area */}
+              <div className="relative overflow-hidden flex items-center justify-center">
+
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.statueName || item.title}
+                    className="w-full h-auto block transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110"
+                  />
+                ) : (
+                  <div className={`w-full h-full ${item.heightClass} transition-transform duration-[2.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-103`}>
+                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-charcoal/25 via-transparent to-white/15 pointer-events-none" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-40">
+                      <div className="w-14 h-14 border border-brand-bronze/15 rounded-full flex items-center justify-center">
+                        <div className="w-8 h-8 border border-brand-bronze/20 rounded-md rotate-12" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Luxury Blur Overlay with Editorial Narrative */}
+                <div className="absolute inset-0 bg-brand-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-between p-8 z-10">
+
+                  {/* Body details in Overlay */}
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-serif text-white font-light">
+                      {item.statueName}
+                    </h3>
+                    <div className="w-8 h-[1px] bg-brand-bronze" />
+                    <p className="text-[11px] text-brand-sand/80 font-light leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div className="flex justify-end mt-auto pt-4">
+                    <span className="text-[9px] tracking-[0.2em] uppercase text-white/50 border-b border-brand-bronze/30 pb-1">
+                      {item.material}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Caption beneath images when not hovered */}
+              <div className="p-5 border-t border-brand-bronze/10 flex justify-between items-center bg-brand-bg/50">
+                <div>
+                  <h4 className="text-xs uppercase tracking-[0.2em] font-medium text-brand-charcoal">
+                    {item.statueName}
+                  </h4>
+                </div>
+                <span className="text-[9px] tracking-[0.1em] text-brand-bronze italic font-serif">
+                  0{String(item.id).replace('bulk-', '').replace('custom-', '')}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="w-full min-h-[400px] flex flex-col items-center justify-center text-center px-4 py-32 border border-brand-bronze/10 bg-brand-sand/5">
+          <span className="text-[11px] uppercase tracking-[0.3em] text-brand-bronze mb-4">Collection Update</span>
+          <p className="text-brand-charcoal font-light italic max-w-md leading-relaxed text-sm">
+            Explore our exquisite custom formations for this <br className="hidden sm:block" /> category in our physical gallery.
+          </p>
+        </div>
+      )}
     </section>
   );
 }

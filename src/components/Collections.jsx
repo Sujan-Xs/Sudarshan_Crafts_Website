@@ -8,7 +8,7 @@ const collectionsList = [
     title: "Ganesha Sculptures",
     shortDesc: "The embodiment of wisdom, auspicious beginnings, and the obstacle-remover, sculpted in pristine marble and sandstone.",
     placeholderClass: "stone-placeholder-marble",
-    image: "/images/ganesha.png",
+
     aspect: "aspect-[3/4]",
     gridClass: "col-span-1 md:col-span-6 lg:col-span-4",
     material: "Makrana Alabaster & Sandstone",
@@ -22,7 +22,7 @@ const collectionsList = [
         craftsmanship: "100% Hand-carved using traditional iron chisels, diamond dust hand-polish.",
         significance: "Depicts Ganesha in a state of tranquil contemplation (Dhyana Vinayaka). The smooth, light-reflective white marble represents purity of consciousness, while the pristine, minimal carving lines represent modern spiritual aesthetics.",
         description: "A museum-grade masterpiece sculpted from a single block of high-grade Makrana marble, the same stone used in the Taj Mahal. The soft contour lines and pristine hand-polished finish allow light to wrap elegantly around the deity's form.",
-        image: "/images/ganesha.png"
+
       },
       {
         name: "Vighnaharta in Dholpur Stone",
@@ -40,7 +40,7 @@ const collectionsList = [
     title: "Shiva Sculptures",
     shortDesc: "Monumental expressions of cosmic silence, absolute consciousness, and deep meditative stillness in absolute dark granite.",
     placeholderClass: "stone-placeholder-granite",
-    image: "/images/shiva.png",
+
     aspect: "aspect-[4/5]",
     gridClass: "col-span-1 md:col-span-6 lg:col-span-4 lg:translate-y-12",
     material: "Absolute Dark Granite & Basalt",
@@ -54,7 +54,7 @@ const collectionsList = [
         craftsmanship: "Monolithic chiseling with high-gloss diamond polished details contrasted against raw, split-face granite textures.",
         significance: "Represents the supreme yogi in deep Samadhi. The absolute black stone absorbs all light, symbolizing the infinite void (Shunya) from which all creation emerges and into which it dissolves.",
         description: "An awe-inspiring monolithic sculpture that anchors any space with profound spiritual gravity. Crafted from one single block of basalt, the facial features emit an aura of supreme, timeless serenity.",
-        image: "/images/shiva.png"
+
       }
     ]
   },
@@ -63,7 +63,7 @@ const collectionsList = [
     title: "Radha Krishna Sculptures",
     shortDesc: "Capturing the cosmic play of divine love, eternal devotion, and spiritual union, carved in warm heritage sandstone.",
     placeholderClass: "stone-placeholder-sandstone",
-    image: "/images/radha_krishna.png",
+
     aspect: "aspect-[3/4]",
     gridClass: "col-span-1 md:col-span-6 lg:col-span-4",
     material: "Warm Beige Sandstone",
@@ -77,7 +77,7 @@ const collectionsList = [
         craftsmanship: "Fine high-relief detailing, hand-smoothed with sandstone powder and oil.",
         significance: "Expresses 'Yugal Sarkar'—the ultimate union of the individual soul (Radha) with the supreme consciousness (Krishna). The soft golden sandstone tones glow warmly in natural sunlight.",
         description: "Placed beautifully by a water body or in an elegant modern sanctum, this sculpture exhibits unmatched grace. The flowing drapery and intricate ornaments are carved with extreme delicacy.",
-        image: "/images/radha_krishna.png"
+
       }
     ]
   },

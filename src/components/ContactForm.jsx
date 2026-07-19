@@ -47,7 +47,7 @@ export default function ContactForm() {
 
   return (
     <section
-      id="inquire"
+      id="contact"
       className="py-24 md:py-36 bg-[#111111] text-brand-sand relative overflow-hidden"
     >
       {/* Visual background details */}

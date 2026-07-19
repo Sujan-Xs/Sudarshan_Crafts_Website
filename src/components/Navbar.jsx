@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,20 +23,23 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'Collections', href: '#collections' },
-    { name: 'Craftsmanship', href: '#craftsmanship' },
-    { name: 'Signature Pieces', href: '#signature' },
     { name: 'About', href: '#about' },
-    { name: 'Gallery', href: '#inspirations' },
-    { name: 'Contact', href: '#inquire' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   const handleScrollTo = (e, id) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    
+    if (location.pathname !== '/') {
+      navigate('/' + (id === 'home' ? '' : '#' + id));
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // Adjust for sticky navbar height
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -51,41 +57,31 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, delay: 2.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-brand-bg/95 backdrop-blur-md py-4 shadow-sm border-b luxury-divider' 
-            : 'bg-transparent py-6 md:py-8'
-        }`}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+          ? 'bg-brand-bg/95 backdrop-blur-md py-4 shadow-sm border-b luxury-divider'
+          : 'bg-transparent py-6 md:py-8'
+          }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center">
-          
+
           {/* Brand Logo & Name */}
-          <a 
-            href="#home" 
+          <a
+            href="#home"
             onClick={(e) => handleScrollTo(e, 'home')}
             className="flex items-center space-x-3 group"
           >
             {/* Elegant Sacred Geometric Logo Icon */}
-            <div className="w-9 h-9 text-brand-bronze transition-transform duration-500 group-hover:rotate-12">
-              <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="50" y="8" width="59.4" height="59.4" transform="rotate(45 50 8)" stroke="currentColor" strokeWidth="1.2" />
-                <circle cx="50" cy="50" r="24" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 2" />
-                <circle cx="50" cy="50" r="16" stroke="currentColor" strokeWidth="1" />
-                <line x1="50" y1="20" x2="50" y2="30" stroke="currentColor" strokeWidth="1" />
-                <line x1="50" y1="70" x2="50" y2="80" stroke="currentColor" strokeWidth="1" />
-                <line x1="20" y1="50" x2="30" y2="50" stroke="currentColor" strokeWidth="1" />
-                <line x1="70" y1="50" x2="80" y2="50" stroke="currentColor" strokeWidth="1" />
-                <circle cx="50" cy="50" r="3" fill="currentColor" />
-              </svg>
+            <div className="w-10 h-10 transition-transform duration-500 group-hover:scale-105 flex-shrink-0">
+              <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
             </div>
-            
-            <div className="flex flex-col">
-              <span className="text-lg md:text-xl font-serif font-light tracking-[0.2em] uppercase text-brand-charcoal transition-colors duration-300 group-hover:text-brand-bronze leading-none">
+
+            <div className="flex flex-col justify-center">
+              <span className="text-xs md:text-sm font-serif font-light tracking-[0.2em] uppercase text-brand-charcoal transition-colors duration-300 group-hover:text-brand-bronze leading-none">
                 Sudarshan Crafts
               </span>
-              <span className="text-[7px] tracking-[0.25em] font-sans font-light uppercase text-brand-grey transition-colors duration-300 group-hover:text-brand-charcoal mt-1">
-                Sacred Stone Atelier
+              <span className="text-[9px] md:text-[10px] tracking-[0.3em] font-sans font-light uppercase text-brand-grey transition-colors duration-300 group-hover:text-brand-charcoal mt-1.5">
+                Museum
               </span>
             </div>
           </a>
@@ -104,16 +100,19 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Inquiry Action Button */}
-          <div className="hidden lg:block">
-            <a
-              href="#inquire"
-              onClick={(e) => handleScrollTo(e, 'inquire')}
-              className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.2em] font-light text-brand-bronze border border-brand-bronze/30 px-6 py-2.5 hover:bg-brand-bronze hover:text-white transition-all duration-300 group"
-            >
-              <span>Acquire & Inquire</span>
-              <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+          {/* Right Logo (SACV) */}
+          <div className="hidden lg:flex items-center space-x-3 text-right">
+            <div className="flex flex-col items-end justify-center">
+              <span className="text-xs md:text-sm font-serif font-light tracking-[0.2em] uppercase text-brand-charcoal leading-none">
+                Sudarshan Art &
+              </span>
+              <span className="text-[9px] md:text-[10px] tracking-[0.3em] font-sans font-light uppercase text-brand-grey mt-1.5">
+                Crafts Village
+              </span>
+            </div>
+            <div className="w-10 h-10 flex-shrink-0">
+              <img src="/images/sacv-logo.avif" alt="Sudarshan Art & Crafts Village Logo" className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
+            </div>
           </div>
 
           {/* Mobile Menu Icon */}
@@ -140,20 +139,15 @@ export default function Navbar() {
             {/* Header in Mobile Menu */}
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 text-brand-bronze">
-                  <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="50" y="8" width="59.4" height="59.4" transform="rotate(45 50 8)" stroke="currentColor" strokeWidth="1.2" />
-                    <circle cx="50" cy="50" r="24" stroke="currentColor" strokeWidth="0.8" strokeDasharray="3 2" />
-                    <circle cx="50" cy="50" r="16" stroke="currentColor" strokeWidth="1" />
-                    <circle cx="50" cy="50" r="3" fill="currentColor" />
-                  </svg>
+                <div className="w-10 h-10 flex-shrink-0">
+                  <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-base font-serif font-light tracking-[0.2em] uppercase text-brand-charcoal leading-none">
+                <div className="flex flex-col justify-center">
+                  <span className="text-sm font-serif font-light tracking-[0.2em] uppercase text-brand-charcoal leading-none">
                     Sudarshan Crafts
                   </span>
-                  <span className="text-[7px] tracking-[0.25em] font-sans font-light uppercase text-brand-grey mt-0.5">
-                    Sacred Stone Atelier
+                  <span className="text-[10px] tracking-[0.3em] font-sans font-light uppercase text-brand-grey mt-1.5">
+                    Museum
                   </span>
                 </div>
               </div>
@@ -187,21 +181,24 @@ export default function Navbar() {
                   </a>
                 </motion.div>
               ))}
-              
+
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: navLinks.length * 0.08 }}
-                className="pt-4"
+                className="pt-4 flex items-center space-x-3"
               >
-                <a
-                  href="#inquire"
-                  onClick={(e) => handleScrollTo(e, 'inquire')}
-                  className="inline-flex items-center space-x-2 text-sm uppercase tracking-[0.2em] text-brand-bronze border-b border-brand-bronze/40 pb-1 hover:border-brand-bronze transition-colors font-light"
-                >
-                  <span>Acquire & Inquire</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
+                <div className="w-10 h-10 flex-shrink-0">
+                  <img src="/images/sacv-logo.avif" alt="Sudarshan Art & Crafts Village Logo" className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <span className="text-sm font-serif font-light tracking-[0.2em] uppercase text-brand-charcoal leading-none">
+                    Sudarshan Art &
+                  </span>
+                  <span className="text-[10px] tracking-[0.3em] font-sans font-light uppercase text-brand-grey mt-1.5">
+                    Crafts Village
+                  </span>
+                </div>
               </motion.div>
             </div>
 

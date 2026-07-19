@@ -10,7 +10,7 @@ const signaturePieces = [
     dimensions: "220 x 110 x 60 cm",
     weight: "820 kg",
     desc: "A monumental expression of cosmic silence and absolute meditative absorption. Features highly refined contours contrasted against raw, split-face geological granite.",
-    image: "/images/shiva.png",
+
     placeholderClass: "stone-placeholder-granite",
     location: "Exhibition Hall, Jaipur"
   },
@@ -21,7 +21,7 @@ const signaturePieces = [
     dimensions: "120 x 75 x 50 cm",
     weight: "280 kg",
     desc: "Sculpted from a single block of high-grade Makrana marble. The light-reflective, fluid contour lines allow shadows to wrap gently around the deity's peaceful form.",
-    image: "/images/ganesha.png",
+
     placeholderClass: "stone-placeholder-marble",
     location: "Private Collector, Milan"
   },
@@ -32,7 +32,7 @@ const signaturePieces = [
     dimensions: "180 x 110 x 55 cm",
     weight: "620 kg",
     desc: "Capturing the eternal spiritual union of Radha and Krishna. Carved in deep, high-relief grace, the soft sand textures radiate a warm, gold-orange glow in sunlight.",
-    image: "/images/radha_krishna.png",
+
     placeholderClass: "stone-placeholder-sandstone",
     location: "Private Estate, Udaipur"
   },
