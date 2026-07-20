@@ -37,7 +37,7 @@ export default function Craftsmanship() {
             {/* Fine border structure overlay */}
             <div className="absolute top-6 left-6 right-6 bottom-6 border border-brand-bronze/10 pointer-events-none flex flex-col justify-between p-4 z-10">
               <div className="flex justify-between items-start">
-                <span className="text-[9px] tracking-[0.25em] text-brand-charcoal/60 uppercase">ATELIER WORKSHOP</span>
+                <span className="text-[9px] tracking-[0.25em] text-brand-charcoal/60 uppercase">WORKSHOP</span>
                 <span className="text-[9px] tracking-[0.25em] text-brand-charcoal/60 uppercase">RAW MONOLITHS</span>
               </div>
               <div className="flex justify-between items-end">
@@ -95,7 +95,7 @@ export default function Craftsmanship() {
               Every stone sculpture is a conversation with time. We journey to historical quarries across India, selecting blocks of Makrana marble, sandstone, and monolithic granites that have formed over hundreds of millions of years. 
             </p>
             <p>
-              Unlike mass-produced modern carvings, our atelier works exclusively with traditional hand tools. From rough layout sketches directly on the stone block to the final smooth polish using diamond dust, every incision is made by a human hand, rendering each artwork a unique, unrepeatable masterpiece.
+              Unlike mass-produced modern carvings, our artisans work exclusively with traditional hand tools. From rough layout sketches directly on the stone block to the final smooth polish using diamond dust, every incision is made by a human hand, rendering each artwork a unique, unrepeatable masterpiece.
             </p>
           </div>
 

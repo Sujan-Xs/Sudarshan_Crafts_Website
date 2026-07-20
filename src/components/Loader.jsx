@@ -72,7 +72,7 @@ export default function Loader({ onComplete }) {
               transition={{ duration: 1, delay: 0.8 }}
               className="text-[10px] tracking-[0.35em] font-sans font-light uppercase text-brand-grey mt-3"
             >
-              Sacred Deity Sculpture Atelier
+              Sacred Deity Sculpture
             </motion.p>
 
             <motion.div 

@@ -17,7 +17,7 @@ const collaborationsList = [
     id: "02 // COLLABORATION"
   },
   {
-    quote: "For our Bel Air sanctuary project, Sudarshan Atelier sculpted a monumental Ganesha in pure Makrana White Marble that radiates tranquil energy and captures light with poetic grace.",
+    quote: "For our Bel Air sanctuary project, Sudarshan Crafts sculpted a monumental Ganesha in pure Makrana White Marble that radiates tranquil energy and captures light with poetic grace.",
     author: "Sarah Sterling",
     title: "Executive Creative Director",
     institution: "Sterling Interiors Group",
@@ -42,7 +42,7 @@ export default function Testimonials() {
             06 // PROVENANCE & SYNERGY
           </span>
           <h2 className="text-3xl md:text-4xl font-serif font-light text-brand-charcoal">
-            Atelier Collaborations
+            Collaborations
           </h2>
           <div className="w-10 h-[1px] bg-brand-bronze my-4" />
           <p className="text-xs text-brand-grey font-light leading-relaxed">

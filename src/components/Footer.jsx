@@ -23,66 +23,66 @@ export default function Footer() {
         {/* Upper Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-brand-bronze/10">
 
-          {/* Logo & Brand Statement Section */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 transition-transform duration-500 group-hover:scale-105 flex-shrink-0">
-                <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="w-full h-full object-contain" style={{ mixBlendMode: 'multiply' }} />
-              </div>
-              <div className="flex flex-col justify-center">
-                <span className="text-xl font-serif font-light tracking-[0.15em] uppercase text-brand-charcoal leading-none">
-                  Sudarshan Crafts
-                </span>
-                <span className="text-[10px] tracking-[0.25em] font-sans font-light uppercase text-brand-grey mt-1.5">
-                  Museum
-                </span>
-              </div>
-            </div>
-            <p className="text-xs text-brand-grey font-light leading-relaxed">
-              Preserving and creating the most exquisite traditional stone architectures and sculptures of Odisha.
-            </p>
-            <div className="flex space-x-6 text-[10px] tracking-[0.2em] uppercase font-light pt-2">
-              <a href="#instagram" className="hover:text-brand-bronze transition-colors flex items-center">
-                <span>Instagram</span>
-                <ArrowUpRight className="w-3 h-3 ml-0.5" />
-              </a>
-              <a href="#facebook" className="hover:text-brand-bronze transition-colors flex items-center">
-                <span>Facebook</span>
-                <ArrowUpRight className="w-3 h-3 ml-0.5" />
-              </a>
-            </div>
-          </div>
+
 
           {/* SCM Contact Info */}
-          <div className="lg:col-span-4 space-y-4 md:pl-10">
-            <span className="text-[11px] tracking-[0.2em] uppercase text-brand-bronze font-medium">Sudarshan Crafts Museum</span>
-            <ul className="space-y-2 text-xs font-light text-brand-grey">
-              <li><span className="block text-brand-charcoal/80">Station Road,</span></li>
-              <li><span className="block text-brand-charcoal/80">Puri, Odisha,</span></li>
-              <li><span className="block text-brand-charcoal/80">India-752 002</span></li>
-              <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 72474</span></li>
-              <li>
-                <a href="mailto:sudarshancrafts@gmail.com" className="hover:text-brand-bronze transition-colors text-brand-charcoal/80">
-                  E-mail: sudarshancrafts@gmail.com
-                </a>
-              </li>
-            </ul>
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+            <div className="space-y-4 md:pl-10">
+              <span className="text-[11px] tracking-[0.2em] uppercase text-brand-bronze font-medium">Sudarshan Crafts Museum</span>
+              <ul className="space-y-2 text-xs font-light text-brand-grey">
+                <li><span className="block text-brand-charcoal/80">Station Road,</span></li>
+                <li><span className="block text-brand-charcoal/80"><b>Puri</b>, Odisha,</span></li>
+                <li><span className="block text-brand-charcoal/80">India-752 002</span></li>
+                <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 72474</span></li>
+                <li>
+                  <a href="mailto:sudarshancrafts@gmail.com" className="hover:text-brand-bronze transition-colors text-brand-charcoal/80">
+                    E-mail: sudarshancrafts@gmail.com
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="w-full h-40 md:h-full min-h-[160px] bg-brand-bronze/10 rounded overflow-hidden shadow-sm grayscale hover:grayscale-0 transition-all duration-500">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                frameBorder="0" 
+                scrolling="no" 
+                marginHeight="0" 
+                marginWidth="0" 
+                src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Sudarshan%20Crafts%20Museum,%20Puri,%20Odisha+(Sudarshan%20Crafts%20Museum)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                title="Sudarshan Crafts Museum Map"
+              ></iframe>
+            </div>
           </div>
 
           {/* SACV Contact Info */}
-          <div className="lg:col-span-4 space-y-4">
-            <span className="text-[11px] tracking-[0.2em] uppercase text-brand-bronze font-medium">Sudarshan Art & Crafts Village</span>
-            <ul className="space-y-2 text-xs font-light text-brand-grey">
-              <li><span className="block text-brand-charcoal/80">CB-5, Jayadev Vihar</span></li>
-              <li><span className="block text-brand-charcoal/80"><b>Bhubaneswar</b>, Odisha,</span></li>
-              <li><span className="block text-brand-charcoal/80">India-751 013</span></li>
-              <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 36161</span></li>
-              <li>
-                <a href="https://www.sudarshancrafts.com" target="_blank" rel="noreferrer" className="hover:text-brand-bronze transition-colors text-brand-charcoal/80">
-                  www.sudarshancrafts.com
-                </a>
-              </li>
-            </ul>
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+            <div className="space-y-4 md:pl-10">
+              <span className="text-[11px] tracking-[0.2em] uppercase text-brand-bronze font-medium">Sudarshan Art & Crafts Village</span>
+              <ul className="space-y-2 text-xs font-light text-brand-grey">
+                <li><span className="block text-brand-charcoal/80">CB-5, Jayadev Vihar</span></li>
+                <li><span className="block text-brand-charcoal/80"><b>Bhubaneswar</b>, Odisha,</span></li>
+                <li><span className="block text-brand-charcoal/80">India-751 013</span></li>
+                <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 36161</span></li>
+                <li>
+                  <a href="https://www.sudarshancrafts.com" target="_blank" rel="noreferrer" className="hover:text-brand-bronze transition-colors text-brand-charcoal/80">
+                    www.sudarshancrafts.com
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="w-full h-40 md:h-full min-h-[160px] bg-brand-bronze/10 rounded overflow-hidden shadow-sm grayscale hover:grayscale-0 transition-all duration-500">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                frameBorder="0" 
+                scrolling="no" 
+                marginHeight="0" 
+                marginWidth="0" 
+                src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Sudarshan%20Art%20and%20Crafts%20Village,%20Bhubaneswar,%20Odisha+(Sudarshan%20Art%20and%20Crafts%20Village)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                title="Sudarshan Art & Crafts Village Map"
+              ></iframe>
+            </div>
           </div>
 
         </div>

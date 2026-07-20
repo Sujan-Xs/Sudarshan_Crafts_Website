@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Ruler, MapPin } from 'lucide-react';
 
 const signaturePieces = [
   {
-    no: "01 / ATELIER ARCHIVE",
+    no: "01 / ARCHIVE",
     title: "Dhyana Shiva",
     material: "Absolute Black Granite",
     dimensions: "220 x 110 x 60 cm",
@@ -15,7 +15,7 @@ const signaturePieces = [
     location: "Exhibition Hall, Jaipur"
   },
   {
-    no: "02 / ATELIER ARCHIVE",
+    no: "02 / ARCHIVE",
     title: "Vinayaka Masterpiece",
     material: "Makrana Alabaster Marble",
     dimensions: "120 x 75 x 50 cm",
@@ -26,7 +26,7 @@ const signaturePieces = [
     location: "Private Collector, Milan"
   },
   {
-    no: "03 / ATELIER ARCHIVE",
+    no: "03 / ARCHIVE",
     title: "Yugal Sarkar Relief",
     material: "Pink Bansi Sandstone",
     dimensions: "180 x 110 x 55 cm",
@@ -37,7 +37,7 @@ const signaturePieces = [
     location: "Private Estate, Udaipur"
   },
   {
-    no: "04 / ATELIER ARCHIVE",
+    no: "04 / ARCHIVE",
     title: "Sharda Devi (Saraswati)",
     material: "Carrara Statuario Marble",
     dimensions: "135 x 70 x 50 cm",

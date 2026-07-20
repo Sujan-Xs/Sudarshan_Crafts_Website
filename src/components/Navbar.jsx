@@ -31,7 +31,7 @@ export default function Navbar() {
   const handleScrollTo = (e, id) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    
+
     if (location.pathname !== '/') {
       navigate('/' + (id === 'home' ? '' : '#' + id));
       return;
@@ -58,9 +58,9 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'bg-brand-bg/95 backdrop-blur-md py-4 shadow-sm border-b luxury-divider'
-          : 'bg-transparent py-6 md:py-8'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#C9BBA6] ${isScrolled
+          ? 'py-2 shadow-sm border-b luxury-divider'
+          : 'py-3 md:py-4'
           }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center">

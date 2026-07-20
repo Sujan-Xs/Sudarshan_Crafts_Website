@@ -14,7 +14,7 @@ export default function AboutBrand() {
         
         {/* Editorial Subheading */}
         <span className="text-[10px] tracking-[0.3em] text-brand-bronze uppercase block font-light mb-8 text-center">
-          04 // THE ATELIER PHILOSOPHY
+          04 // THE PHILOSOPHY
         </span>
 
         {/* Elegant Centered Blockquote */}
@@ -37,7 +37,7 @@ export default function AboutBrand() {
           <div className="w-16 h-[1px] bg-brand-bronze mx-auto my-8" />
           
           <span className="text-xs uppercase tracking-[0.25em] font-sans font-light text-brand-bronze">
-            SUDARSHAN ATELIER CREDO
+            SUDARSHAN CREDO
           </span>
         </motion.div>
 

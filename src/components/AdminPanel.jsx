@@ -4,7 +4,7 @@ import { Upload, X, Check, Image as ImageIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function AdminPanel() {
-  const { statues, addStatue, removeStatue } = usePhotos();
+  const { statues, addStatue, removeStatue, sliderImages, addSliderImage, removeSliderImage, mobileSliderImages, addMobileSliderImage, removeMobileSliderImage } = usePhotos();
   const [activeTab, setActiveTab] = useState('upload'); // 'upload' | 'gallery'
   const [preview, setPreview] = useState(null);
   const [statueName, setStatueName] = useState('');
@@ -110,7 +110,7 @@ export default function AdminPanel() {
       {/* Admin Header */}
       <div className="flex justify-between items-end border-b border-brand-bronze/20 pb-8 mb-12">
         <div>
-          <h1 className="text-3xl font-serif font-light text-white tracking-wider">Atelier Dashboard</h1>
+          <h1 className="text-3xl font-serif font-light text-white tracking-wider">Dashboard</h1>
           <p className="text-xs text-brand-grey uppercase tracking-[0.2em] mt-2">Gallery Content Management</p>
         </div>
         <div className="flex space-x-4">
@@ -127,20 +127,34 @@ export default function AdminPanel() {
       </div>
 
       {/* Tabs */}
-      <div className="flex space-x-8 mb-12 border-b border-brand-charcoal">
+      <div className="flex space-x-8 mb-12 border-b border-brand-charcoal overflow-x-auto hide-scrollbar">
         <button 
           onClick={() => setActiveTab('upload')}
-          className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative ${activeTab === 'upload' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
+          className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'upload' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
         >
           Add New Statue
           {activeTab === 'upload' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
         </button>
         <button 
           onClick={() => setActiveTab('gallery')}
-          className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative ${activeTab === 'gallery' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
+          className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'gallery' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
         >
           Manage Gallery
           {activeTab === 'gallery' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
+        </button>
+        <button 
+          onClick={() => setActiveTab('slider')}
+          className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'slider' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
+        >
+          Hero Slider
+          {activeTab === 'slider' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
+        </button>
+        <button 
+          onClick={() => setActiveTab('slider_mobile')}
+          className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'slider_mobile' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
+        >
+          Hero Slider (Mobile)
+          {activeTab === 'slider_mobile' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
         </button>
       </div>
 
@@ -223,32 +237,236 @@ export default function AdminPanel() {
 
       {/* Gallery Tab */}
       {activeTab === 'gallery' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8 space-y-8">
           {statues.length === 0 ? (
-            <div className="col-span-full py-20 text-center text-brand-grey italic font-light">
-              No statues have been added to the custom gallery yet.
+            <div className="w-full min-h-[400px] flex flex-col items-center justify-center text-center px-4 py-32 border border-brand-bronze/10 bg-[#1A1A17]">
+              <span className="text-[11px] uppercase tracking-[0.3em] text-brand-bronze mb-4">Gallery is Empty</span>
+              <p className="text-brand-grey font-light italic max-w-md leading-relaxed text-sm">
+                No statues have been added to the custom gallery yet.
+              </p>
             </div>
           ) : (
-            statues.map(statue => (
-              <div key={statue.id} className="bg-[#1A1A17] border border-brand-bronze/10 p-4 space-y-4 group">
-                <div className="h-48 bg-black/50 border border-brand-bronze/5 flex items-center justify-center relative overflow-hidden">
-                  <img src={statue.image} alt={statue.statueName} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <button 
-                    onClick={() => removeStatue(statue.id)}
-                    className="absolute top-2 right-2 bg-red-900/80 text-white p-2 hover:bg-red-600 transition-colors opacity-0 group-hover:opacity-100"
-                    title="Remove Image"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
+            statues.map((statue, idx) => (
+              <div
+                key={statue.id}
+                className="relative group overflow-hidden w-full break-inside-avoid border border-brand-bronze/10 bg-brand-sand/15 transition-all duration-500 hover:border-brand-bronze/35 hover:shadow-lg"
+              >
+                {/* Delete Button - Absolute Top Right */}
+                <button 
+                  onClick={() => removeStatue(statue.id)}
+                  className="absolute top-4 right-4 z-50 bg-red-900/80 text-white p-2 hover:bg-red-600 transition-colors opacity-0 group-hover:opacity-100 shadow-md"
+                  title="Remove Image"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+
+                {/* Fine boundary borders */}
+                <div className="absolute top-4 left-4 right-4 bottom-4 border border-brand-bronze/5 pointer-events-none transition-all duration-500 group-hover:border-brand-bronze/15 z-20" />
+
+                {/* Content Area */}
+                <div className="relative overflow-hidden flex items-center justify-center bg-brand-bg">
+                  <img
+                    src={statue.image}
+                    alt={statue.statueName}
+                    className="w-full h-auto block transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110"
+                  />
+
+                  {/* Luxury Blur Overlay with Editorial Narrative */}
+                  <div className="absolute inset-0 bg-brand-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-between p-8 z-10 pointer-events-none">
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-serif text-white font-light">
+                        {statue.statueName}
+                      </h3>
+                      <div className="w-8 h-[1px] bg-brand-bronze" />
+                      <p className="text-[11px] text-brand-sand/80 font-light leading-relaxed">
+                        {statue.description}
+                      </p>
+                    </div>
+
+                    <div className="flex justify-end mt-auto pt-4">
+                      <span className="text-[9px] tracking-[0.2em] uppercase text-white/50 border-b border-brand-bronze/30 pb-1">
+                        {statue.material}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-center space-y-2">
-                  <span className="text-sm text-brand-bronze font-serif block">{statue.statueName}</span>
-                  <span className="text-[9px] uppercase tracking-widest text-brand-grey">{statue.material}</span>
-                  <p className="text-[10px] text-brand-grey font-light line-clamp-2 mt-1">{statue.description}</p>
+
+                {/* Caption beneath images when not hovered */}
+                <div className="p-5 border-t border-brand-bronze/10 flex justify-between items-center bg-brand-bg">
+                  <div>
+                    <h4 className="text-xs uppercase tracking-[0.2em] font-medium text-brand-charcoal">
+                      {statue.statueName}
+                    </h4>
+                  </div>
+                  <span className="text-[9px] tracking-[0.1em] text-brand-bronze italic font-serif">
+                    0{idx + 1}
+                  </span>
                 </div>
               </div>
             ))
           )}
+        </div>
+      )}
+
+      {/* Slider Images Tab */}
+      {activeTab === 'slider' && (
+        <div className="space-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div className="space-y-8">
+              <div className="space-y-2">
+                <label className="text-xs text-brand-grey uppercase tracking-[0.15em]">Upload Desktop Slider Photo</label>
+                <div className="border-2 border-dashed border-brand-bronze/20 hover:border-brand-bronze/50 transition-colors bg-[#1A1A17] p-12 flex flex-col items-center justify-center text-center cursor-pointer relative">
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={handleFileChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                  <Upload className="w-8 h-8 text-brand-bronze mb-4 opacity-50" />
+                  <span className="text-sm text-white">Click or drag image to upload</span>
+                  <span className="text-[10px] text-brand-grey mt-2">Recommended Dimensions: 1920x1080px (16:9 ratio)</span>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => {
+                  if (preview) {
+                    addSliderImage(preview);
+                    setPreview(null);
+                    alert('Slider image added successfully!');
+                  } else {
+                    alert('Please provide a photo.');
+                  }
+                }}
+                disabled={!preview}
+                className="w-full bg-brand-bronze text-white uppercase text-xs tracking-[0.2em] py-4 hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>Add to Desktop Slider</span>
+                <Check className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-2">
+               <label className="text-xs text-brand-grey uppercase tracking-[0.15em]">Photo Preview</label>
+               <div className="bg-[#1A1A17] border border-brand-bronze/20 h-[300px] flex items-center justify-center p-4">
+                 {preview ? (
+                   <img src={preview} alt="Upload preview" className="max-w-full max-h-full object-contain shadow-2xl" />
+                 ) : (
+                   <div className="flex flex-col items-center opacity-30">
+                      <ImageIcon className="w-12 h-12 mb-4" />
+                      <span className="text-sm font-light">No photo selected</span>
+                   </div>
+                 )}
+               </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xs text-brand-grey uppercase tracking-[0.15em]">Current Desktop Slider Images</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {sliderImages.length === 0 ? (
+                <div className="col-span-full py-20 text-center text-brand-grey italic font-light">
+                  No images in desktop slider.
+                </div>
+              ) : (
+                sliderImages.map(slide => (
+                  <div key={slide.id} className="bg-[#1A1A17] border border-brand-bronze/10 p-4 space-y-4 group">
+                    <div className="aspect-video bg-black/50 border border-brand-bronze/5 flex items-center justify-center relative overflow-hidden">
+                      <img src={slide.image} alt="Slider" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                      <button 
+                        onClick={() => removeSliderImage(slide.id)}
+                        className="absolute top-2 right-2 bg-red-900/80 text-white p-2 hover:bg-red-600 transition-colors opacity-0 group-hover:opacity-100"
+                        title="Remove Image"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Slider Images Tab */}
+      {activeTab === 'slider_mobile' && (
+        <div className="space-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div className="space-y-8">
+              <div className="space-y-2">
+                <label className="text-xs text-brand-grey uppercase tracking-[0.15em]">Upload Mobile Slider Photo</label>
+                <div className="border-2 border-dashed border-brand-bronze/20 hover:border-brand-bronze/50 transition-colors bg-[#1A1A17] p-12 flex flex-col items-center justify-center text-center cursor-pointer relative">
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={handleFileChange}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                  <Upload className="w-8 h-8 text-brand-bronze mb-4 opacity-50" />
+                  <span className="text-sm text-white">Click or drag image to upload</span>
+                  <span className="text-[10px] text-brand-grey mt-2">Recommended Dimensions: 1080x1920px (9:16 ratio)</span>
+                </div>
+              </div>
+              
+              <button 
+                onClick={() => {
+                  if (preview) {
+                    addMobileSliderImage(preview);
+                    setPreview(null);
+                    alert('Mobile slider image added successfully!');
+                  } else {
+                    alert('Please provide a photo.');
+                  }
+                }}
+                disabled={!preview}
+                className="w-full bg-brand-bronze text-white uppercase text-xs tracking-[0.2em] py-4 hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>Add to Mobile Slider</span>
+                <Check className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-2">
+               <label className="text-xs text-brand-grey uppercase tracking-[0.15em]">Photo Preview</label>
+               <div className="bg-[#1A1A17] border border-brand-bronze/20 h-[300px] flex items-center justify-center p-4">
+                 {preview ? (
+                   <img src={preview} alt="Upload preview" className="max-w-full max-h-full object-contain shadow-2xl" />
+                 ) : (
+                   <div className="flex flex-col items-center opacity-30">
+                      <ImageIcon className="w-12 h-12 mb-4" />
+                      <span className="text-sm font-light">No photo selected</span>
+                   </div>
+                 )}
+               </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-xs text-brand-grey uppercase tracking-[0.15em]">Current Mobile Slider Images</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {mobileSliderImages.length === 0 ? (
+                <div className="col-span-full py-20 text-center text-brand-grey italic font-light">
+                  No images in mobile slider.
+                </div>
+              ) : (
+                mobileSliderImages.map(slide => (
+                  <div key={slide.id} className="bg-[#1A1A17] border border-brand-bronze/10 p-4 space-y-4 group">
+                    <div className="aspect-[9/16] bg-black/50 border border-brand-bronze/5 flex items-center justify-center relative overflow-hidden">
+                      <img src={slide.image} alt="Mobile Slider" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                      <button 
+                        onClick={() => removeMobileSliderImage(slide.id)}
+                        className="absolute top-2 right-2 bg-red-900/80 text-white p-2 hover:bg-red-600 transition-colors opacity-0 group-hover:opacity-100"
+                        title="Remove Image"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </div>
       )}
 

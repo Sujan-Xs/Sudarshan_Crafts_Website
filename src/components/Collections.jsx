@@ -12,7 +12,7 @@ const collectionsList = [
     aspect: "aspect-[3/4]",
     gridClass: "col-span-1 md:col-span-6 lg:col-span-4",
     material: "Makrana Alabaster & Sandstone",
-    size: "Atelier Curated",
+    size: "Curated",
     masterworks: [
       {
         name: "Vinayaka in Makrana Marble",
@@ -304,7 +304,7 @@ export default function Collections() {
         </div>
         <div className="mt-6 lg:mt-0 flex flex-col items-start lg:items-end">
           <span className="text-xs uppercase tracking-[0.2em] font-light text-brand-charcoal block">
-            SACRED ARTISTRY ATELIER
+            SACRED ARTISTRY
           </span>
           <span className="text-[10px] uppercase tracking-[0.15em] font-light text-brand-bronze block mt-1 italic">
             Museum-Grade Sculptures
@@ -363,7 +363,7 @@ export default function Collections() {
                 {/* Immersive overlay on hover */}
                 <div className="absolute inset-0 bg-brand-dark/45 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 z-10">
                   <span className="text-[9px] tracking-[0.3em] uppercase text-brand-sandstone font-medium mb-1">
-                    ATELIER CATALOGUE
+                    CATALOGUE
                   </span>
                   <p className="text-xs text-white/95 uppercase tracking-[0.2em] font-light leading-relaxed mb-4">
                     {item.material}
@@ -438,7 +438,7 @@ export default function Collections() {
                   </h2>
                 </div>
                 <div className="text-[10px] tracking-[0.25em] text-brand-grey uppercase font-light">
-                  ATELIER ARCHIVE NO. {activeCollection.id}
+                  ARCHIVE NO. {activeCollection.id}
                 </div>
               </div>
 
@@ -583,7 +583,7 @@ export default function Collections() {
 
               {/* Catalogue Footer */}
               <div className="p-6 md:px-12 border-t border-brand-bronze/10 text-[8px] tracking-[0.25em] uppercase text-brand-grey font-light flex justify-between items-center bg-brand-secondary/20">
-                <span>Sudarshan Crafts Luxury Sculpture Atelier</span>
+                <span>Sudarshan Crafts Luxury Sculpture</span>
                 <span className="hidden sm:inline">Handcrafted In India // Exhibited Globally</span>
               </div>
             </motion.div>

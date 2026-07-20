@@ -11,20 +11,9 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Custom high-end scrollbar */
+  /* Custom high-end scrollbar - Hidden by request */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #F8F4EE;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #9A7652;
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4A3728;
+    display: none;
   }
 }
 
