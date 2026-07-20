@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
 import { ArrowUpRight, X, Ruler, Sparkles, HelpCircle, Compass, Calendar, ChevronRight } from 'lucide-react';
 
 const collectionsList = [
@@ -313,17 +313,12 @@ export default function Collections() {
       </div>
 
       {/* Asymmetric Grid Content */}
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+      <div
         className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"
       >
         {collectionsList.map((item) => (
-          <motion.div
+          <div
             key={item.id}
-            variants={cardVariants}
             onClick={() => handleOpenCollection(item)}
             className={`${item.gridClass} group flex flex-col cursor-pointer`}
           >
@@ -394,25 +389,16 @@ export default function Collections() {
               </span>
             </div>
             
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
 
       {/* FULLSCREEN EXHIBITION DIGITAL CATALOG OVERLAY (Detail Catalog Page) */}
-      <AnimatePresence>
-        {activeCollection && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
+      {activeCollection && (
+          <div
             className="fixed inset-0 z-[100] bg-brand-dark/95 backdrop-blur-md overflow-y-auto px-4 py-8 md:p-12 flex justify-center"
           >
-            <motion.div 
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 50, opacity: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            <div
               className="bg-brand-bg max-w-5xl w-full border border-brand-bronze/20 shadow-2xl relative flex flex-col my-auto"
             >
               {/* Subtle visual grain */}
@@ -586,10 +572,9 @@ export default function Collections() {
                 <span>Sudarshan Crafts Luxury Sculpture</span>
                 <span className="hidden sm:inline">Handcrafted In India // Exhibited Globally</span>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
-    </section>
+      </section>
   );
 }

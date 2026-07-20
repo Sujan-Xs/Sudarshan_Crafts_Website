@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+
 import { ChevronLeft, ChevronRight, Ruler, MapPin } from 'lucide-react';
 
 const signaturePieces = [

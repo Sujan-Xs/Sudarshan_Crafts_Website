@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Eye, Map } from 'lucide-react';
 import { usePhotos } from '../hooks/usePhotos';
 import { bulkGalleryItems } from '../gallery_data';
@@ -127,7 +126,7 @@ export default function InteriorInspiration() {
   return (
     <section
       id="inspirations"
-      className="py-24 md:py-36 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden"
+      className="pt-12 md:pt-16 pb-24 md:pb-36 px-6 md:px-12 max-w-[1400px] mx-auto overflow-hidden"
     >
       {/* Section Header */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end border-b luxury-divider pb-12 mb-16">

@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 export default function About() {
   return (
@@ -21,11 +20,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           
           {/* Crafts Museum */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1 }}
+          <div
             className="flex flex-col space-y-8"
           >
             <div className="border-b border-brand-bronze/20 pb-4">
@@ -54,14 +49,10 @@ export default function About() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Arts and Crafts Village */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, delay: 0.2 }}
+          <div
             className="flex flex-col space-y-8"
           >
             <div className="border-b border-brand-bronze/20 pb-4">
@@ -90,7 +81,7 @@ export default function About() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>

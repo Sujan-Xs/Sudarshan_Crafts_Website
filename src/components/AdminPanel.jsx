@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { usePhotos } from '../hooks/usePhotos';
+import { useInquiries } from '../hooks/useInquiries';
 import { Upload, X, Check, Image as ImageIcon } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 export default function AdminPanel() {
   const { statues, addStatue, removeStatue, sliderImages, addSliderImage, removeSliderImage, mobileSliderImages, addMobileSliderImage, removeMobileSliderImage } = usePhotos();
-  const [activeTab, setActiveTab] = useState('upload'); // 'upload' | 'gallery'
+  const { inquiries, removeInquiry } = useInquiries();
+  const [activeTab, setActiveTab] = useState('upload'); // 'upload' | 'gallery' | 'slider' | 'slider_mobile' | 'inquiries'
+  const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [statueName, setStatueName] = useState('');
   const [statueMaterial, setStatueMaterial] = useState('');
   const [statueDescription, setStatueDescription] = useState('');
@@ -75,30 +78,58 @@ export default function AdminPanel() {
   }
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(selectedFile);
     }
   };
 
-  const handleSave = () => {
-    if (preview && statueName && statueDescription && statueMaterial) {
-      addStatue({
-        statueName: statueName,
-        material: statueMaterial,
-        description: statueDescription,
-        image: preview
-      });
-      setPreview(null);
-      setStatueName('');
-      setStatueMaterial('');
-      setStatueDescription('');
-      alert('Statue added successfully to the gallery!');
-      setActiveTab('gallery');
+  const uploadToCloud = async (uploadFile) => {
+    const res = await fetch('/api/get-upload-url', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contentType: uploadFile.type })
+    });
+    if (!res.ok) throw new Error('Cloud credentials not configured or endpoint failed.');
+    const { uploadUrl, publicUrl } = await res.json();
+    
+    const putRes = await fetch(uploadUrl, {
+      method: 'PUT',
+      headers: { 'Content-Type': uploadFile.type },
+      body: uploadFile
+    });
+    if (!putRes.ok) throw new Error('Failed to upload to Cloudflare R2.');
+    return publicUrl;
+  };
+
+  const handleSave = async () => {
+    if (preview && file && statueName && statueDescription && statueMaterial) {
+      setIsUploading(true);
+      try {
+        const publicUrl = await uploadToCloud(file);
+        await addStatue({
+          statueName: statueName,
+          material: statueMaterial,
+          description: statueDescription,
+          image: publicUrl
+        });
+        setPreview(null);
+        setFile(null);
+        setStatueName('');
+        setStatueMaterial('');
+        setStatueDescription('');
+        alert('Statue added successfully to the gallery!');
+        setActiveTab('gallery');
+      } catch (err) {
+        alert('Upload failed: ' + err.message);
+      } finally {
+        setIsUploading(false);
+      }
     } else {
       alert('Please provide a photo, a name, a material, and a description.');
     }
@@ -133,28 +164,35 @@ export default function AdminPanel() {
           className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'upload' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
         >
           Add New Statue
-          {activeTab === 'upload' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
+          {activeTab === 'upload' && <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
         </button>
         <button 
           onClick={() => setActiveTab('gallery')}
           className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'gallery' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
         >
           Manage Gallery
-          {activeTab === 'gallery' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
+          {activeTab === 'gallery' && <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
         </button>
         <button 
           onClick={() => setActiveTab('slider')}
           className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'slider' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
         >
           Hero Slider
-          {activeTab === 'slider' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
+          {activeTab === 'slider' && <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
         </button>
         <button 
           onClick={() => setActiveTab('slider_mobile')}
           className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'slider_mobile' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
         >
           Hero Slider (Mobile)
-          {activeTab === 'slider_mobile' && <motion.div layoutId="tab" className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
+          {activeTab === 'slider_mobile' && <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
+        </button>
+        <button 
+          onClick={() => setActiveTab('inquiries')}
+          className={`pb-3 text-xs uppercase tracking-[0.15em] transition-colors relative whitespace-nowrap ${activeTab === 'inquiries' ? 'text-brand-bronze' : 'text-brand-grey hover:text-white'}`}
+        >
+          Customer Inquiries
+          {activeTab === 'inquiries' && <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-brand-bronze" />}
         </button>
       </div>
 
@@ -329,20 +367,29 @@ export default function AdminPanel() {
               </div>
               
               <button 
-                onClick={() => {
-                  if (preview) {
-                    addSliderImage(preview);
-                    setPreview(null);
-                    alert('Slider image added successfully!');
+                onClick={async () => {
+                  if (preview && file) {
+                    setIsUploading(true);
+                    try {
+                      const publicUrl = await uploadToCloud(file);
+                      await addSliderImage(publicUrl);
+                      setPreview(null);
+                      setFile(null);
+                      alert('Slider image added successfully!');
+                    } catch (err) {
+                      alert('Upload failed: ' + err.message);
+                    } finally {
+                      setIsUploading(false);
+                    }
                   } else {
                     alert('Please provide a photo.');
                   }
                 }}
-                disabled={!preview}
+                disabled={!preview || isUploading}
                 className="w-full bg-brand-bronze text-white uppercase text-xs tracking-[0.2em] py-4 hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>Add to Desktop Slider</span>
-                <Check className="w-4 h-4" />
+                <span>{isUploading ? 'Uploading to Cloud...' : 'Add to Desktop Slider'}</span>
+                {!isUploading && <Check className="w-4 h-4" />}
               </button>
             </div>
 
@@ -410,20 +457,29 @@ export default function AdminPanel() {
               </div>
               
               <button 
-                onClick={() => {
-                  if (preview) {
-                    addMobileSliderImage(preview);
-                    setPreview(null);
-                    alert('Mobile slider image added successfully!');
+                onClick={async () => {
+                  if (preview && file) {
+                    setIsUploading(true);
+                    try {
+                      const publicUrl = await uploadToCloud(file);
+                      await addMobileSliderImage(publicUrl);
+                      setPreview(null);
+                      setFile(null);
+                      alert('Mobile slider image added successfully!');
+                    } catch (err) {
+                      alert('Upload failed: ' + err.message);
+                    } finally {
+                      setIsUploading(false);
+                    }
                   } else {
                     alert('Please provide a photo.');
                   }
                 }}
-                disabled={!preview}
+                disabled={!preview || isUploading}
                 className="w-full bg-brand-bronze text-white uppercase text-xs tracking-[0.2em] py-4 hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>Add to Mobile Slider</span>
-                <Check className="w-4 h-4" />
+                <span>{isUploading ? 'Uploading to Cloud...' : 'Add to Mobile Slider'}</span>
+                {!isUploading && <Check className="w-4 h-4" />}
               </button>
             </div>
 
@@ -467,6 +523,43 @@ export default function AdminPanel() {
               )}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Inquiries Tab */}
+      {activeTab === 'inquiries' && (
+        <div className="space-y-6">
+          <h2 className="text-xl font-serif font-light text-white mb-6">Customer Inquiries</h2>
+          {inquiries.length === 0 ? (
+            <p className="text-brand-grey font-light">No inquiries yet.</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {inquiries.map((inq) => (
+                <div key={inq.id} className="bg-[#1A1A17] border border-brand-bronze/20 p-6 flex flex-col space-y-4">
+                  <div>
+                    <h3 className="text-white text-lg font-serif font-light">{inq.full_name}</h3>
+                    <p className="text-brand-bronze text-xs font-light">{new Date(inq.created_at).toLocaleDateString()}</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-brand-grey text-xs"><span className="text-brand-sand">Email:</span> {inq.email}</p>
+                    <p className="text-brand-grey text-xs"><span className="text-brand-sand">Phone:</span> {inq.phone}</p>
+                  </div>
+                  <div>
+                    <p className="text-brand-sand text-xs font-light leading-relaxed">{inq.description}</p>
+                  </div>
+                  <div className="mt-auto pt-4 flex justify-end border-t border-brand-bronze/10">
+                    <button 
+                      onClick={() => removeInquiry(inq.id)}
+                      className="text-red-400 hover:text-red-300 text-xs uppercase tracking-widest transition-colors flex items-center space-x-1"
+                    >
+                      <X className="w-3 h-3" />
+                      <span>Delete</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

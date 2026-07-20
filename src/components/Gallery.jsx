@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 export default function Gallery() {
@@ -64,12 +63,8 @@ export default function Gallery() {
         {/* Gallery Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {categories.map((category, idx) => (
-            <motion.div
+            <div
               key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: idx * 0.1 }}
               className="bg-brand-bg border border-brand-bronze/20 p-8 hover:shadow-[0_10px_30px_rgba(154,118,82,0.1)] transition-shadow duration-500 flex flex-col"
             >
               <div className="flex items-center space-x-4 mb-6 pb-6 border-b border-brand-bronze/20">
@@ -93,16 +88,12 @@ export default function Gallery() {
                   Explore our exquisite custom fiber glass formations in our physical gallery.
                 </div>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Call to Action for Visual Gallery */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+        <div
           className="mt-20 text-center"
         >
           <Link
@@ -111,7 +102,7 @@ export default function Gallery() {
           >
             Explore Visual Gallery
           </Link>
-        </motion.div>
+        </div>
 
       </div>
     </section>

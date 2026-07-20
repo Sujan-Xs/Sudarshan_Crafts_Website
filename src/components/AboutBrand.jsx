@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+
 import { Quote } from 'lucide-react';
 
 export default function AboutBrand() {
@@ -18,11 +18,7 @@ export default function AboutBrand() {
         </span>
 
         {/* Elegant Centered Blockquote */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        <div
           className="text-center max-w-4xl relative px-4 md:px-8 mb-20"
         >
           {/* Subtle bronze quote graphic */}
@@ -39,17 +35,13 @@ export default function AboutBrand() {
           <span className="text-xs uppercase tracking-[0.25em] font-sans font-light text-brand-bronze">
             SUDARSHAN CREDO
           </span>
-        </motion.div>
+        </div>
 
         {/* Triple-Column Editorial Spread */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 border-t border-brand-bronze/15 pt-16 w-full">
           
           {/* Column 1: Tectonic Philosophy */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.1 }}
+          <div
             className="space-y-4"
           >
             <span className="text-[9px] tracking-[0.25em] text-brand-bronze uppercase font-medium block">
@@ -61,14 +53,10 @@ export default function AboutBrand() {
             <p className="text-xs text-brand-grey font-light leading-relaxed">
               We approach raw stone with geological humility. Our sculptors study the grain, the fissures, and the density of each block for weeks before making the first strike. This slow process ensures we honor the material's innate weight and character.
             </p>
-          </motion.div>
+          </div>
 
           {/* Column 2: Pristine Sourcing */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.25 }}
+          <div
             className="space-y-4"
           >
             <span className="text-[9px] tracking-[0.25em] text-brand-bronze uppercase font-medium block">
@@ -80,14 +68,10 @@ export default function AboutBrand() {
             <p className="text-xs text-brand-grey font-light leading-relaxed">
               Our materials are hand-selected from heritage quarries worldwide. From pristine Makrana white marble (the marble of the Taj Mahal) to dense regional sandstones and deep dark volcanic granites, only 5% of quarried blocks meet our artistic standards.
             </p>
-          </motion.div>
+          </div>
 
           {/* Column 3: Space Integration */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.4 }}
+          <div
             className="space-y-4"
           >
             <span className="text-[9px] tracking-[0.25em] text-brand-bronze uppercase font-medium block">
@@ -99,7 +83,7 @@ export default function AboutBrand() {
             <p className="text-xs text-brand-grey font-light leading-relaxed">
               We design sculptures to inhabit spaces permanently. Collaborating with interior designers, landscape architects, and hotel collectors, we ensure each piece is positioned to harness shifting natural light, shadow, and architectural breathing room.
             </p>
-          </motion.div>
+          </div>
 
         </div>
 

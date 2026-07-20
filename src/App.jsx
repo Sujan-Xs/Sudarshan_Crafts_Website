@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Gallery from './components/Gallery';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
@@ -41,7 +40,6 @@ function MainWebsite() {
       <main className="relative z-10">
         <Hero />
         <About />
-        <Gallery />
         <ContactForm />
       </main>
       <Footer />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+
 import { Hammer, Landmark, Award } from 'lucide-react';
 
 export default function Craftsmanship() {
@@ -24,11 +24,7 @@ export default function Craftsmanship() {
         <div className="lg:col-span-6 relative">
           
           {/* Main textured container acting as "Artisan Workshop Space" */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          <div
             className="w-full aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] stone-placeholder-sandstone border border-brand-bronze/25 p-8 flex flex-col justify-between shadow-lg relative group"
           >
             {/* Texture graphic elements */}
@@ -70,7 +66,7 @@ export default function Craftsmanship() {
               </span>
             </div>
 
-          </motion.div>
+          </div>
 
           {/* Floater background card */}
           <div className="absolute -bottom-6 -right-6 w-32 h-32 border border-brand-bronze/10 bg-brand-bg/40 backdrop-blur-sm -z-10 pointer-events-none hidden md:block" />
@@ -95,18 +91,14 @@ export default function Craftsmanship() {
               Every stone sculpture is a conversation with time. We journey to historical quarries across India, selecting blocks of Makrana marble, sandstone, and monolithic granites that have formed over hundreds of millions of years. 
             </p>
             <p>
-              Unlike mass-produced modern carvings, our artisans work exclusively with traditional hand tools. From rough layout sketches directly on the stone block to the final smooth polish using diamond dust, every incision is made by a human hand, rendering each artwork a unique, unrepeatable masterpiece.
+              Unlike mass-produced modern carvings, our artisans work exclusively with traditional hand tools. From rough sketches directly on the stone block to the final smooth polish using diamond dust, every incision is made by a human hand, rendering each artwork a unique, unrepeatable masterpiece.
             </p>
           </div>
 
-          {/* High-end statistics layout */}
+          {/* High-end statistics */}
           <div className="grid grid-cols-3 gap-6 pt-6 border-t border-brand-bronze/20">
             {stats.map((stat, idx) => (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: idx * 0.15, ease: "easeOut" }}
+              <div
                 key={stat.label}
                 className="space-y-1"
               >
@@ -119,7 +111,7 @@ export default function Craftsmanship() {
                 <span className="block text-[8px] text-brand-grey leading-tight font-light">
                   {stat.desc}
                 </span>
-              </motion.div>
+              </div>
             ))}
           </div>
 

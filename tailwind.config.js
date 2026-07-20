@@ -24,6 +24,7 @@ export default {
       fontFamily: {
         serif: ['"Cormorant Garamond"', '"Playfair Display"', 'serif'],
         sans: ['Inter', 'sans-serif'],
+        navbar: ['"Source Serif 4"', 'serif'],
       },
       letterSpacing: {
         widest: '0.25em',

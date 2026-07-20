@@ -3,6 +3,25 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: 'Source Serif 4';
+    src: url('/assets/Source_Serif_4/SourceSerif4-VariableFont_opsz,wght.ttf') format('truetype');
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Playfair Custom';
+    src: url('/assets/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Playfair Custom';
+    src: url('/assets/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: italic;
+    font-display: swap;
+  }
+
   body {
     background-color: #F8F4EE;
     color: #1E1A17;

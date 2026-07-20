@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
 import { Send, CheckCircle2, Clock, MapPin, Mail, Phone, Calendar } from 'lucide-react';
+import { useInquiries } from '../hooks/useInquiries';
 
 export default function ContactForm() {
-  const [inquiryType, setInquiryType] = useState('commission'); // 'commission' | 'catalogue' | 'consultation'
+  const { addInquiry } = useInquiries();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
-    role: '',
-    email: '',
     phone: '',
-    projectDetails: '',
-    preferredDate: '',
+    email: '',
+    description: '',
   });
 
   const handleInputChange = (e) => {
@@ -19,31 +18,31 @@ export default function ContactForm() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate luxury API response delay
-    setTimeout(() => {
+    try {
+      await addInquiry({
+        full_name: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        description: formData.description
+      });
       setFormSubmitted(true);
-    }, 1000);
+    } catch (error) {
+      console.error("Failed to submit inquiry", error);
+      alert("Failed to submit inquiry. Please try again.");
+    }
   };
 
   const resetForm = () => {
     setFormData({
       fullName: '',
-      role: '',
-      email: '',
       phone: '',
-      projectDetails: '',
-      preferredDate: '',
+      email: '',
+      description: '',
     });
     setFormSubmitted(false);
   };
-
-  const tabs = [
-    { id: 'commission', label: 'Commission Sacred Art', desc: 'Submit specifications for custom hand-carved deity stone masterpieces.' },
-    { id: 'catalogue', label: 'Request Private Catalogue', desc: 'Acquire our private leatherbound print or high-fidelity digital museum archives.' },
-    { id: 'consultation', label: 'Consult for Architectural Spaces', desc: 'Consult with our master sculptors for hotel foyer, public monument, or villa installations.' }
-  ];
 
   return (
     <section
@@ -59,66 +58,34 @@ export default function ContactForm() {
         {/* Left Column: Premium Brand Metadata & Studio Details */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-12">
 
-          <div className="space-y-6">
-            <span className="text-[10px] tracking-[0.3em] text-brand-bronze uppercase block font-light">
-              07 // ACQUISITIONS & INQUIRIES
-            </span>
+          <div className="flex flex-col">
             <h2 className="text-4xl md:text-5xl font-serif font-light text-white leading-tight">
               Begin a <br /><span className="italic text-brand-bronze">Bespoke Commission</span>
             </h2>
-            <div className="w-12 h-[1px] bg-brand-bronze my-6" />
-            <p className="text-xs text-brand-grey font-light leading-relaxed max-w-sm">
-              We accept a limited number of custom architectural and residential commissions annually to ensure meticulous quality. We invite collectors, architects, and designers to reach out.
-            </p>
-          </div>
+            <div className="w-12 h-[1px] bg-brand-bronze mt-6 mb-4" />
 
-          {/* Contact Details List */}
-          <div className="space-y-8 border-t border-brand-sand/10 pt-10">
-
-            <div className="flex items-start space-x-4">
-              <MapPin className="w-4 h-4 text-brand-bronze stroke-[1.5] mt-0.5" />
-              <div>
-                <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Sudarshan Crafts Museum</span>
-                <span className="text-xs text-white/90 font-light mt-1 block">
-                  Station Road<br />Puri- 752002, Odisha, India
-                </span>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-4">
+                <Mail className="w-4 h-4 text-brand-bronze mt-0.5" />
+                <div>
+                  <h4 className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">Email</h4>
+                  <a href="mailto:sudarshancrafts@gmail.com" className="text-sm text-white font-light hover:text-brand-bronze transition-colors">
+                    sudarshancrafts@gmail.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-4">
+                <Phone className="w-4 h-4 text-brand-bronze mt-0.5" />
+                <div>
+                  <h4 className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">Phone</h4>
+                  <div className="flex flex-col leading-snug">
+                    <a href="tel:+919437072474" className="text-sm text-white font-light hover:text-brand-bronze transition-colors">+91 94370 72474</a>
+                    <a href="tel:+919437036161" className="text-sm text-white font-light hover:text-brand-bronze transition-colors">+91 94370 36161</a>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div className="flex items-start space-x-4">
-              <Clock className="w-4 h-4 text-brand-bronze stroke-[1.5] mt-0.5" />
-              <div>
-                <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Gallery Viewings</span>
-                <span className="text-xs text-white/90 font-light mt-1 block">
-                  Strictly by prior private appointment only.<br />Monday — Saturday: 07:00am to 05:00pm
-                </span>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-4">
-              <Mail className="w-4 h-4 text-brand-bronze stroke-[1.5] mt-0.5" />
-              <div>
-                <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Electronic Correspondence</span>
-                <a href="mailto:curator@sudarshancrafts.com" className="text-xs text-white hover:text-brand-bronze transition-colors mt-1 block font-light">
-                  curator@sudarshancrafts.com
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-start space-x-4">
-              <Phone className="w-4 h-4 text-brand-bronze stroke-[1.5] mt-0.5" />
-              <div>
-                <span className="text-[9px] tracking-[0.2em] uppercase text-brand-grey block">Telephonic Line</span>
-                <a href="tel:+911412789988" className="text-xs text-white hover:text-brand-bronze transition-colors mt-1 block font-light">
-                  +06725 220474
-                </a>
-              </div>
-            </div>
-
-          </div>
-
-          <div className="text-[9px] tracking-[0.25em] text-brand-grey uppercase font-light border-t border-brand-sand/10 pt-6">
-            <span>SUDARSHAN CRAFTS MUSEUM © 2026</span>
           </div>
 
         </div>
@@ -129,42 +96,10 @@ export default function ContactForm() {
             {/* Fine border inside container */}
             <div className="absolute top-4 left-4 right-4 bottom-4 border border-brand-bronze/5 pointer-events-none" />
 
-            <AnimatePresence mode="wait">
-              {!formSubmitted ? (
-                <motion.div
+            {!formSubmitted ? (
+                <div
                   key="form-fields"
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
                 >
-                  {/* Luxury tab switchers */}
-                  <div className="flex flex-col sm:flex-row border-b border-brand-sand/10 pb-6 mb-8 gap-4">
-                    {tabs.map((tab) => (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        onClick={() => setInquiryType(tab.id)}
-                        className={`text-xs uppercase tracking-[0.15em] font-light pb-2 text-left relative transition-colors duration-300 ${inquiryType === tab.id
-                          ? 'text-brand-bronze font-medium'
-                          : 'text-brand-grey hover:text-brand-sand'
-                          }`}
-                      >
-                        {tab.label}
-                        {inquiryType === tab.id && (
-                          <motion.div
-                            layoutId="activeTabIndicator"
-                            className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-brand-bronze"
-                          />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Dynamic description of tab context */}
-                  <p className="text-[11px] tracking-wider text-brand-grey uppercase font-light mb-8 italic">
-                    {tabs.find(t => t.id === inquiryType)?.desc}
-                  </p>
-
                   {/* Form Submission */}
                   <form onSubmit={handleSubmit} className="space-y-8">
 
@@ -184,37 +119,6 @@ export default function ContactForm() {
                         />
                       </div>
 
-                      {/* Role input */}
-                      <div className="flex flex-col space-y-2">
-                        <label htmlFor="role" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">Professional Role</label>
-                        <input
-                          type="text"
-                          id="role"
-                          name="role"
-                          value={formData.role}
-                          onChange={handleInputChange}
-                          className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300"
-                          placeholder="e.g., Principal Architect / Collector"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {/* Email input */}
-                      <div className="flex flex-col space-y-2">
-                        <label htmlFor="email" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">Email Address *</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          required
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300"
-                          placeholder="e.g., aditya@sharma.com"
-                        />
-                      </div>
-
                       {/* Phone input */}
                       <div className="flex flex-col space-y-2">
                         <label htmlFor="phone" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">Contact Number *</label>
@@ -223,53 +127,49 @@ export default function ContactForm() {
                           id="phone"
                           name="phone"
                           required
+                          pattern="[0-9]{10}"
+                          maxLength={10}
+                          minLength={10}
+                          title="Please enter exactly 10 digits"
                           value={formData.phone}
                           onChange={handleInputChange}
                           className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300"
-                          placeholder="e.g., +91 9876543285"
+                          placeholder="e.g., 9876543210"
                         />
                       </div>
                     </div>
 
-                    {/* Conditional Input based on selection */}
-                    {inquiryType === 'consultation' && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        className="flex flex-col space-y-2"
-                      >
-                        <label htmlFor="preferredDate" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light flex items-center">
-                          <Calendar className="w-3.5 h-3.5 text-brand-bronze mr-1" />
-                          <span>Preferred Consultation Date</span>
-                        </label>
-                        <input
-                          type="date"
-                          id="preferredDate"
-                          name="preferredDate"
-                          value={formData.preferredDate}
-                          onChange={handleInputChange}
-                          className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300 cursor-pointer"
-                        />
-                      </motion.div>
-                    )}
-
-                    {/* Project notes */}
+                    {/* Email input */}
                     <div className="flex flex-col space-y-2">
-                      <label htmlFor="projectDetails" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">
-                        {inquiryType === 'catalogue' ? 'Shipping Address / Delivery details' : 'Project description & Site dimensions'}
+                      <label htmlFor="email" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">Email Address *</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                        title="Please enter a valid email address (e.g., name@example.com)"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300"
+                        placeholder="e.g., yourname@email.com"
+                      />
+                    </div>
+
+                    {/* Description input */}
+                    <div className="flex flex-col space-y-2">
+                      <label htmlFor="description" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">
+                        Description of the Statue *
                       </label>
                       <textarea
-                        id="projectDetails"
-                        name="projectDetails"
+                        id="description"
+                        name="description"
                         rows={3}
-                        value={formData.projectDetails}
+                        required
+                        value={formData.description}
                         onChange={handleInputChange}
                         className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300 resize-none"
-                        placeholder={
-                          inquiryType === 'catalogue'
-                            ? "Please include physical shipping address if requiring a printed hardcover catalogue..."
-                            : "Describe the architectural setting, stone preferences, scaling, and general timeframe..."
-                        }
+                        placeholder="Please describe your requirements for the custom sculpture..."
                       />
                     </div>
 
@@ -283,14 +183,11 @@ export default function ContactForm() {
                     </button>
 
                   </form>
-                </motion.div>
+                </div>
               ) : (
                 // Elegant Submission Success Card
-                <motion.div
+                <div
                   key="success-card"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
                   className="flex flex-col items-center justify-center py-16 text-center space-y-6"
                 >
                   <CheckCircle2 className="w-16 h-16 text-brand-bronze stroke-[1.25] animate-pulse-subtle" />
@@ -314,11 +211,9 @@ export default function ContactForm() {
                   >
                     Submit New Request
                   </button>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
-
-          </div>
+            </div>
         </div>
 
       </div>

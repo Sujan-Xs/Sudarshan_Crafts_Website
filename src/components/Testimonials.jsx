@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+
 
 const collaborationsList = [
   {
@@ -53,11 +53,7 @@ export default function Testimonials() {
         {/* Minimal Monochrome Card Deck Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {collaborationsList.map((collab, index) => (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+            <div
               key={collab.author}
               className="border border-brand-bronze/10 p-8 flex flex-col justify-between relative bg-brand-bg/50 backdrop-blur-sm group hover:border-brand-bronze/30 transition-colors duration-500 shadow-sm"
             >
@@ -88,7 +84,7 @@ export default function Testimonials() {
                   {collab.institution}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 

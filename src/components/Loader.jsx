@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
 
 export default function Loader({ onComplete }) {
   const [show, setShow] = useState(true);
@@ -14,10 +14,8 @@ export default function Loader({ onComplete }) {
   }, [onComplete]);
 
   return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          initial={{ opacity: 1 }}
+    {show && (
+        <div
           exit={{ 
             opacity: 0,
             transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
@@ -30,10 +28,7 @@ export default function Loader({ onComplete }) {
           <div className="flex flex-col items-center text-center max-w-lg">
             
             {/* Elegant Sacred Geometric Logo Icon */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -45 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+            <div
               className="w-16 h-16 flex items-center justify-center mb-8 relative text-brand-bronze"
             >
               <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,56 +50,40 @@ export default function Loader({ onComplete }) {
                 {/* Center Bindu (spiritual spark dot) */}
                 <circle cx="50" cy="50" r="3.5" fill="currentColor" />
               </svg>
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            <h1
               className="text-3xl md:text-4xl lg:text-5xl font-serif font-light tracking-[0.25em] uppercase text-brand-charcoal"
             >
               Sudarshan Crafts
-            </motion.h1>
+            </h1>
             
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.7 }}
-              transition={{ duration: 1, delay: 0.8 }}
+            <p
               className="text-[10px] tracking-[0.35em] font-sans font-light uppercase text-brand-grey mt-3"
             >
               Sacred Deity Sculpture
-            </motion.p>
+            </p>
 
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: 60 }}
-              transition={{ duration: 1.2, delay: 1.2, ease: "easeOut" }}
+            <div
               className="h-[1px] bg-brand-bronze/45 my-6"
             />
 
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.4 }}
+            <p
               className="text-xs md:text-sm font-serif italic text-brand-bronze tracking-[0.1em] max-w-sm"
             >
               "Sacred Stone Art Crafted for Timeless Spaces"
-            </motion.p>
+            </p>
           </div>
 
           <div className="absolute bottom-12 flex flex-col items-center">
             <span className="text-[10px] tracking-[0.4em] uppercase text-brand-grey/50">
               Entering Exhibition
             </span>
-            <motion.div 
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 2.2, ease: "easeInOut" }}
+            <div
               className="w-32 h-[1px] bg-brand-bronze/40 mt-2 origin-left"
             />
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
-  );
+    );
 }
