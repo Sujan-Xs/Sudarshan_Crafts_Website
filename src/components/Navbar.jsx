@@ -42,6 +42,14 @@ export default function Navbar() {
       return;
     }
 
+    if (id === 'home') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+
     const element = document.getElementById(id);
     if (element) {
       const offset = 80;

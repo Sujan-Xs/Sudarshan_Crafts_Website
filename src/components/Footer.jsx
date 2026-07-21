@@ -34,11 +34,7 @@ export default function Footer() {
                 <li><span className="block text-brand-charcoal/80"><b>Puri</b>, Odisha,</span></li>
                 <li><span className="block text-brand-charcoal/80">India-752 002</span></li>
                 <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 72474</span></li>
-                <li>
-                  <a href="mailto:sudarshancrafts@gmail.com" className="hover:text-brand-bronze transition-colors text-brand-charcoal/80">
-                    E-mail: sudarshancrafts@gmail.com
-                  </a>
-                </li>
+
               </ul>
             </div>
             <div className="w-full h-40 md:h-full min-h-[160px] bg-brand-bronze/10 rounded overflow-hidden shadow-sm grayscale hover:grayscale-0 transition-all duration-500">
@@ -64,11 +60,7 @@ export default function Footer() {
                 <li><span className="block text-brand-charcoal/80"><b>Bhubaneswar</b>, Odisha,</span></li>
                 <li><span className="block text-brand-charcoal/80">India-751 013</span></li>
                 <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 36161</span></li>
-                <li>
-                  <a href="https://www.sudarshancrafts.com" target="_blank" rel="noreferrer" className="hover:text-brand-bronze transition-colors text-brand-charcoal/80">
-                    www.sudarshancrafts.com
-                  </a>
-                </li>
+
               </ul>
             </div>
             <div className="w-full h-40 md:h-full min-h-[160px] bg-brand-bronze/10 rounded overflow-hidden shadow-sm grayscale hover:grayscale-0 transition-all duration-500">
@@ -92,8 +84,6 @@ export default function Footer() {
 
           <div className="flex flex-wrap gap-4 md:gap-8 order-2 md:order-1 mt-6 md:mt-0">
             <span>© 2026 Sudarshan Crafts. All rights reserved.</span>
-            <a href="#privacy" className="hover:text-brand-bronze transition-colors">Privacy Charter</a>
-            <a href="#terms" className="hover:text-brand-bronze transition-colors">Terms of Fine Art</a>
           </div>
 
           {/* Scroll to Top Circle button */}

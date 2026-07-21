@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 import getUploadUrlHandler from './api/get-upload-url.js';
+import uploadImageHandler from './api/upload-image.js';
 
 // Load .env.local for backend keys
 dotenv.config({ path: '.env.local' });
@@ -18,6 +19,19 @@ const apiMiddleware = () => {
            req.on('end', () => {
               req.body = JSON.parse(body || '{}');
               getUploadUrlHandler(req, res);
+           });
+        } else {
+           next();
+        }
+      });
+
+      server.middlewares.use('/api/upload-image', (req, res, next) => {
+        if (req.method === 'POST') {
+           const chunks = [];
+           req.on('data', chunk => chunks.push(chunk));
+           req.on('end', () => {
+              req.body = Buffer.concat(chunks);
+              uploadImageHandler(req, res);
            });
         } else {
            next();

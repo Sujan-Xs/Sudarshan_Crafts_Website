@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { usePhotos } from '../hooks/usePhotos';
@@ -9,6 +10,7 @@ export default function Hero() {
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [isAnimating, setIsAnimating] = useState(false);
   const photos = {}; // Removed dynamic photos since admin panel now only manages gallery statues
 
   useEffect(() => {
@@ -20,7 +22,19 @@ export default function Hero() {
 
   const activeSliderImages = isMobile && mobileSliderImages.length > 0 ? mobileSliderImages : sliderImages;
 
-  const [isAnimating, setIsAnimating] = useState(false);
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? '100%' : '-100%',
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? '100%' : '-100%',
+    })
+  };
 
   useEffect(() => {
     setIsLoaded(true);
@@ -79,31 +93,44 @@ export default function Hero() {
     <>
       {/* Full Screen Image Slider (Below Navbar) */}
       <section className="relative w-full mt-[72px] h-[calc(100vh-72px)] overflow-hidden bg-brand-bg">
+        <AnimatePresence initial={false} custom={direction}>
           {activeSliderImages.length > 0 && (
-            <img
+            <motion.img
               key={currentIndex}
               src={activeSliderImages[currentIndex]?.image}
               alt={`Slide ${currentIndex + 1}`}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "tween", ease: [0.4, 0, 0.2, 1], duration: 0.8 }
+              }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              onDragEnd={handleDragEnd}
+              onAnimationComplete={() => setIsAnimating(false)}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ willChange: "transform" }}
               draggable={false}
             />
           )}
+        </AnimatePresence>
 
         {/* Manual Slider Controls */}
         <button
           onClick={prevSlide}
-          disabled={isAnimating}
-          className="absolute left-6 md:left-12 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-brand-bronze hover:border-brand-bronze transition-all backdrop-blur-md bg-black/30 group disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute left-6 md:left-12 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-brand-bronze hover:border-brand-bronze transition-all backdrop-blur-md bg-black/30 group"
         >
-          <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+          <ChevronLeft className="w-5 h-5 pr-[2px] group-hover:-translate-x-1 transition-transform" />
         </button>
         <button
           onClick={nextSlide}
-          disabled={isAnimating}
-          className="absolute right-6 md:right-12 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-brand-bronze hover:border-brand-bronze transition-all backdrop-blur-md bg-black/30 group disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute right-6 md:right-12 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white hover:bg-brand-bronze hover:border-brand-bronze transition-all backdrop-blur-md bg-black/30 group"
         >
-          <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="w-5 h-5 pl-[2px] group-hover:translate-x-1 transition-transform" />
         </button>
       </section>
 

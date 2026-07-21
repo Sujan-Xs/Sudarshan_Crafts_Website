@@ -2,11 +2,11 @@ import React from 'react';
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6 md:px-12 bg-brand-bg relative">
+    <section className="py-24 px-6 md:px-12 bg-brand-bg relative">
       <div className="max-w-[1200px] mx-auto">
         
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div id="about" className="text-center mb-20">
           <div className="inline-flex items-center justify-center space-x-2 text-[10px] tracking-[0.25em] text-brand-bronze uppercase mb-4">
             <span className="w-1 h-1 rounded-full bg-brand-bronze" />
             <span>Our Institutions</span>

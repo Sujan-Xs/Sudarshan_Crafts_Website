@@ -90,20 +90,22 @@ export default function AdminPanel() {
   };
 
   const uploadToCloud = async (uploadFile) => {
-    const res = await fetch('/api/get-upload-url', {
+    // Send the raw file directly to our server-side API
+    // which will convert it to AVIF and upload it to R2
+    const res = await fetch('/api/upload-image', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contentType: uploadFile.type })
-    });
-    if (!res.ok) throw new Error('Cloud credentials not configured or endpoint failed.');
-    const { uploadUrl, publicUrl } = await res.json();
-    
-    const putRes = await fetch(uploadUrl, {
-      method: 'PUT',
-      headers: { 'Content-Type': uploadFile.type },
+      headers: {
+        'Content-Type': 'application/octet-stream',
+      },
       body: uploadFile
     });
-    if (!putRes.ok) throw new Error('Failed to upload to Cloudflare R2.');
+    
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error || 'Failed to upload and convert image.');
+    }
+    
+    const { publicUrl } = await res.json();
     return publicUrl;
   };
 
