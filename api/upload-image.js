@@ -2,6 +2,12 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import { v4 as uuidv4 } from 'uuid';
 import sharp from 'sharp';
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export default async function handler(req, res) {
   // Polyfills for raw Node.js environments (local dev)
   if (!res.status) res.status = (code) => { res.statusCode = code; return res; };

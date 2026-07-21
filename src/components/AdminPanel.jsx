@@ -102,7 +102,8 @@ export default function AdminPanel() {
     
     if (!res.ok) {
       const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.error || 'Failed to upload and convert image.');
+      const errorMsg = errData.details ? `${errData.error}: ${errData.details}` : errData.error;
+      throw new Error(errorMsg || 'Failed to upload and convert image.');
     }
     
     const { publicUrl } = await res.json();
