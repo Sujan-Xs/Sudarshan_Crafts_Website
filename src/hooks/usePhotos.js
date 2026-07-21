@@ -26,7 +26,13 @@ export function usePhotos() {
         supabase.from('mobile_slider_images').select('*').order('created_at', { ascending: true }),
       ]);
 
-      if (statuesRes.data) setStatues(statuesRes.data);
+      if (statuesRes.data) {
+        const mappedStatues = statuesRes.data.map(s => ({
+          ...s,
+          statueName: s.statuename // Map database 'statuename' to frontend 'statueName'
+        }));
+        setStatues(mappedStatues);
+      }
       
       if (sliderRes.data && sliderRes.data.length > 0) setSliderImages(sliderRes.data);
       if (mobileSliderRes.data && mobileSliderRes.data.length > 0) setMobileSliderImages(mobileSliderRes.data);
@@ -37,10 +43,28 @@ export function usePhotos() {
   };
 
   const addStatue = async (statue) => {
-    const newStatue = { ...statue, id: Date.now().toString() };
-    setStatues(prev => [...prev, newStatue]);
-    const { error } = await supabase.from('custom_statues').insert([newStatue]);
-    if (error) console.error("Error inserting statue:", error);
+    const id = Date.now().toString();
+    const optimisticStatue = { ...statue, id };
+    setStatues(prev => [...prev, optimisticStatue]);
+    
+    const dbPayload = {
+      id,
+      statuename: statue.statueName, // Map frontend 'statueName' to database 'statuename'
+      material: statue.material,
+      description: statue.description,
+      image: statue.image
+    };
+
+    const { data, error } = await supabase.from('custom_statues').insert([dbPayload]).select();
+    
+    if (error) {
+      console.error("Error inserting statue:", error);
+      setStatues(prev => prev.filter(s => s.id !== id));
+      alert("Failed to save to database: " + error.message);
+    } else if (data && data.length > 0) {
+      const mapped = { ...data[0], statueName: data[0].statuename };
+      setStatues(prev => prev.map(s => s.id === id ? mapped : s));
+    }
   };
 
   const removeStatue = async (id) => {
@@ -49,9 +73,18 @@ export function usePhotos() {
   };
 
   const addSliderImage = async (image) => {
-    const newItem = { image, id: Date.now().toString() };
-    setSliderImages(prev => [...prev.filter(img => !img.id.startsWith('default_')), newItem]);
-    await supabase.from('slider_images').insert([newItem]);
+    const id = Date.now().toString();
+    const optimisticItem = { image, id };
+    setSliderImages(prev => [...prev.filter(img => !img.id.startsWith('default_')), optimisticItem]);
+    
+    const { data, error } = await supabase.from('slider_images').insert([{ id, image }]).select();
+    if (error) {
+      console.error("Error inserting slider image:", error);
+      setSliderImages(prev => prev.filter(s => s.id !== id));
+      alert("Failed to save to database: " + error.message);
+    } else if (data && data.length > 0) {
+      setSliderImages(prev => prev.map(s => s.id === id ? data[0] : s));
+    }
   };
 
   const removeSliderImage = async (id) => {
@@ -60,9 +93,18 @@ export function usePhotos() {
   };
 
   const addMobileSliderImage = async (image) => {
-    const newItem = { image, id: Date.now().toString() };
-    setMobileSliderImages(prev => [...prev.filter(img => !img.id.startsWith('default_')), newItem]);
-    await supabase.from('mobile_slider_images').insert([newItem]);
+    const id = Date.now().toString();
+    const optimisticItem = { image, id };
+    setMobileSliderImages(prev => [...prev.filter(img => !img.id.startsWith('default_')), optimisticItem]);
+    
+    const { data, error } = await supabase.from('mobile_slider_images').insert([{ id, image }]).select();
+    if (error) {
+      console.error("Error inserting mobile slider image:", error);
+      setMobileSliderImages(prev => prev.filter(s => s.id !== id));
+      alert("Failed to save to database: " + error.message);
+    } else if (data && data.length > 0) {
+      setMobileSliderImages(prev => prev.map(s => s.id === id ? data[0] : s));
+    }
   };
 
   const removeMobileSliderImage = async (id) => {
