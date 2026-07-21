@@ -78,7 +78,7 @@ export default function Navbar() {
 
           {/* Brand Logo & Name */}
             {/* Brand Logo & Name Placeholder */}
-            <div className="flex items-center space-x-3 group cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')}>
+            <div className="flex items-center space-x-3 group cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
               <div className="h-10 w-40 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
                 <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">
                   Museum Logo<br/>Placeholder
@@ -101,7 +101,7 @@ export default function Navbar() {
           </div>
 
           {/* Right Logo (SACV) Placeholder */}
-          <div className="hidden lg:flex items-center space-x-3 text-right cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')}>
+          <div className="hidden lg:flex items-center space-x-3 text-right cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home (Art & Crafts Village)">
             <div className="h-10 w-48 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
               <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">
                 Art & Crafts Village<br/>Logo Placeholder
@@ -127,7 +127,7 @@ export default function Navbar() {
           >
             {/* Header in Mobile Menu Placeholder */}
             <div className="flex justify-between items-center w-full">
-              <div className="flex items-center space-x-3 cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')}>
+              <div className="flex items-center space-x-3 cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
                 <div className="h-10 w-40 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
                   <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">
                     Museum Logo<br/>Placeholder
@@ -165,6 +165,9 @@ export default function Navbar() {
               <div
                 className="pt-4 flex items-center space-x-3 cursor-pointer"
                 onClick={(e) => handleScrollTo(e, 'home')}
+                role="button" 
+                tabIndex="0" 
+                aria-label="Go to home (Art & Crafts Village)"
               >
                 <div className="h-10 w-48 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
                   <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">

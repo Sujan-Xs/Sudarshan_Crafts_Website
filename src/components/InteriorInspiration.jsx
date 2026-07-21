@@ -182,6 +182,9 @@ export default function InteriorInspiration() {
                   <img
                     src={item.image}
                     alt={item.statueName || item.title}
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
                     className="w-full h-auto block transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110"
                   />
                 ) : (

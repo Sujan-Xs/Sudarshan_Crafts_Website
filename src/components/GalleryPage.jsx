@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import InteriorInspiration from './InteriorInspiration';
+import SEO from './SEO';
 
 export default function GalleryPage() {
   useEffect(() => {
@@ -10,6 +11,18 @@ export default function GalleryPage() {
 
   return (
     <div className="relative bg-brand-bg">
+      <SEO 
+        title="Sudarshan Crafts Gallery | Masterpiece Stone Sculptures"
+        description="Explore our exclusive gallery of premium stone sculptures. From majestic Ganesha idols to intricate sandstone temple art, crafted by Odisha's master artisans."
+        url="https://www.sudarshancrafts.com/gallery"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ImageGallery",
+          "name": "Sudarshan Crafts Sculpture Gallery",
+          "description": "Gallery of premium handcrafted Hindu deity stone sculptures.",
+          "url": "https://www.sudarshancrafts.com/gallery"
+        }}
+      />
       <div className="grain-overlay" />
       <Navbar />
       <main className="relative z-10 pt-12 md:pt-20">

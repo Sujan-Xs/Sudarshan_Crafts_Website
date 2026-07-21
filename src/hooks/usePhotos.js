@@ -1,12 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
-const defaultSliderImages = [
-  { id: 'default_1', image: "/images/gallery_custom_1.avif" },
-  { id: 'default_2', image: "/images/gallery_custom_2.avif" },
-  { id: 'default_3', image: "/images/gallery_custom_3.avif" },
-  { id: 'default_4', image: "/images/gallery_custom_4.avif" }
-];
+const defaultSliderImages = [];
 
 export function usePhotos() {
   const [statues, setStatues] = useState([]);

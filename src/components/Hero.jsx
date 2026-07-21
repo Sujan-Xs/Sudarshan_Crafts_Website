@@ -116,6 +116,8 @@ export default function Hero() {
               className="absolute inset-0 w-full h-full object-cover"
               style={{ willChange: "transform" }}
               draggable={false}
+              loading="eager"
+              fetchpriority="high"
             />
           )}
         </AnimatePresence>
@@ -243,7 +245,12 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-brand-sand/30 flex items-center justify-center z-10 overflow-hidden border border-brand-bronze/10">
                     <img
                       src="/images/sudarshan-sahoo.avif"
-                      alt="Shri Sudarshan Sahoo"
+                      alt="Shri Sudarshan Sahoo - Founder and Master Craftsman"
+                      width="360"
+                      height="480"
+                      loading="eager"
+                      fetchpriority="high"
+                      decoding="async"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                       onError={(e) => {
                         e.target.style.display = 'none';

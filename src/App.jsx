@@ -7,6 +7,7 @@ import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
 import GalleryPage from './components/GalleryPage';
+import SEO from './components/SEO';
 
 function MainWebsite() {
   const location = useLocation();
@@ -35,6 +36,48 @@ function MainWebsite() {
 
   return (
     <div className="relative">
+      <SEO 
+        title="Sudarshan Crafts | Premium Hindu Deity Stone Sculptures & Luxury Art Atelier"
+        description="Sudarshan Crafts designs premium handcrafted Hindu deity stone sculptures. Discover museum-grade white marble, regional sandstone, and absolute granite masterworks for luxury residences, meditative spaces, and grand architectural temples."
+        schema={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "LocalBusiness",
+              "@id": "https://www.sudarshancrafts.com/#localbusiness",
+              "name": "Sudarshan Crafts",
+              "image": "https://www.sudarshancrafts.com/images/sudarshan-sahoo.avif",
+              "url": "https://www.sudarshancrafts.com/",
+              "description": "Premium handcrafted Hindu deity stone sculptures by Padma Vibhushan Shri Sudarshan Sahoo.",
+              "founder": {
+                "@type": "Person",
+                "name": "Shri Sudarshan Sahoo"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Bhubaneswar",
+                "addressRegion": "Odisha",
+                "addressCountry": "IN"
+              }
+            },
+            {
+              "@type": "WebPage",
+              "@id": "https://www.sudarshancrafts.com/#webpage",
+              "url": "https://www.sudarshancrafts.com/",
+              "name": "Sudarshan Crafts | Premium Hindu Deity Stone Sculptures & Luxury Art Atelier",
+              "isPartOf": {
+                "@id": "https://www.sudarshancrafts.com/#website"
+              }
+            },
+            {
+              "@type": "Website",
+              "@id": "https://www.sudarshancrafts.com/#website",
+              "url": "https://www.sudarshancrafts.com/",
+              "name": "Sudarshan Crafts"
+            }
+          ]
+        }}
+      />
       <div className="grain-overlay" />
       <Navbar />
       <main className="relative z-10">

@@ -52,11 +52,11 @@ export default function Loader({ onComplete }) {
               </svg>
             </div>
 
-            <h1
+            <div
               className="text-3xl md:text-4xl lg:text-5xl font-serif font-light tracking-[0.25em] uppercase text-brand-charcoal"
             >
               Sudarshan Crafts
-            </h1>
+            </div>
             
             <p
               className="text-[10px] tracking-[0.35em] font-sans font-light uppercase text-brand-grey mt-3"
