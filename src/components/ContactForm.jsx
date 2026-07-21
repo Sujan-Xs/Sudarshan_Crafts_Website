@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
-import { Send, CheckCircle2, Clock, MapPin, Mail, Phone, Calendar } from 'lucide-react';
+import { Send, CheckCircle2, Clock, MapPin, Mail, Phone, Calendar, ChevronDown } from 'lucide-react';
 import { useInquiries } from '../hooks/useInquiries';
 
 export default function ContactForm() {
@@ -8,10 +8,45 @@ export default function ContactForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
+    countryCode: '+91',
     phone: '',
     email: '',
     description: '',
   });
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const countryCodes = [
+    { code: '+91', label: 'IN (+91)' },
+    { code: '+1', label: 'US/CA (+1)' },
+    { code: '+44', label: 'UK (+44)' },
+    { code: '+61', label: 'AU (+61)' },
+    { code: '+81', label: 'JP (+81)' },
+    { code: '+971', label: 'UAE (+971)' },
+    { code: '+65', label: 'SG (+65)' },
+    { code: '+49', label: 'DE (+49)' },
+    { code: '+33', label: 'FR (+33)' },
+    { code: '+39', label: 'IT (+39)' },
+    { code: '+34', label: 'ES (+34)' },
+    { code: '+86', label: 'CN (+86)' },
+    { code: '+27', label: 'ZA (+27)' },
+    { code: '+55', label: 'BR (+55)' },
+    { code: '+52', label: 'MX (+52)' },
+    { code: '+966', label: 'SA (+966)' },
+    { code: '+60', label: 'MY (+60)' },
+    { code: '+64', label: 'NZ (+64)' },
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,12 +56,44 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // 1. Log to Supabase Database
       await addInquiry({
         full_name: formData.fullName,
-        phone: formData.phone,
+        phone: `${formData.countryCode} ${formData.phone}`,
         email: formData.email,
         description: formData.description
       });
+
+      // 2. Send Email via Web3Forms
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+      if (accessKey) {
+        const payload = {
+          access_key: accessKey,
+          subject: `New Commission Inquiry - ${formData.fullName}`,
+          from_name: "Sudarshan Crafts System",
+          name: formData.fullName,
+          email: formData.email,
+          phone: `${formData.countryCode} ${formData.phone}`,
+          message: formData.description
+        };
+
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+        if (!result.success) {
+          console.error("Failed to dispatch email:", result.message);
+        }
+      } else {
+        console.warn("VITE_WEB3FORMS_ACCESS_KEY not configured. Email notification skipped.");
+      }
+
       setFormSubmitted(true);
     } catch (error) {
       console.error("Failed to submit inquiry", error);
@@ -37,6 +104,7 @@ export default function ContactForm() {
   const resetForm = () => {
     setFormData({
       fullName: '',
+      countryCode: '+91',
       phone: '',
       email: '',
       description: '',
@@ -121,20 +189,49 @@ export default function ContactForm() {
                       {/* Phone input */}
                       <div className="flex flex-col space-y-2">
                         <label htmlFor="phone" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">Contact Number *</label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          required
-                          pattern="[0-9]{10}"
-                          maxLength={10}
-                          minLength={10}
-                          title="Please enter exactly 10 digits"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300"
-                          placeholder="e.g., 9876543210"
-                        />
+                        <div className="flex items-center border-b border-brand-sand/20 focus-within:border-brand-bronze transition-colors duration-300 pb-2 relative" ref={dropdownRef}>
+                          <div 
+                            className="flex items-center space-x-1 cursor-pointer mr-3"
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                          >
+                            <span className="text-sm text-brand-sand font-light select-none">
+                              {formData.countryCode}
+                            </span>
+                            <ChevronDown className="w-3 h-3 text-brand-sand/70" />
+                          </div>
+
+                          {isDropdownOpen && (
+                            <div className="absolute top-full left-0 mt-2 w-32 bg-[#1A1A17] border border-brand-bronze/20 shadow-xl z-50 max-h-48 overflow-y-auto">
+                              {countryCodes.map((c, idx) => (
+                                <div 
+                                  key={idx}
+                                  className={`px-3 py-2 text-xs cursor-pointer hover:bg-brand-bronze/20 transition-colors ${formData.countryCode === c.code ? 'text-brand-bronze bg-brand-bronze/10' : 'text-white'}`}
+                                  onClick={() => {
+                                    setFormData(prev => ({ ...prev, countryCode: c.code }));
+                                    setIsDropdownOpen(false);
+                                  }}
+                                >
+                                  {c.label}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            required
+                            pattern="[0-9\s\-\(\)]{7,20}"
+                            maxLength={20}
+                            minLength={7}
+                            title="Please enter a valid phone number"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            className="bg-transparent flex-1 focus:outline-none text-sm text-white font-light w-full"
+                            placeholder="98765 43210"
+                          />
+                        </div>
                       </div>
                     </div>
 
@@ -158,7 +255,7 @@ export default function ContactForm() {
                     {/* Description input */}
                     <div className="flex flex-col space-y-2">
                       <label htmlFor="description" className="text-[10px] tracking-[0.2em] uppercase text-brand-grey font-light">
-                        Description of the Statue *
+                        Your query *
                       </label>
                       <textarea
                         id="description"
@@ -168,7 +265,7 @@ export default function ContactForm() {
                         value={formData.description}
                         onChange={handleInputChange}
                         className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300 resize-none"
-                        placeholder="Please describe your requirements for the custom sculpture..."
+                        placeholder=""
                       />
                     </div>
 

@@ -4,7 +4,7 @@ export default function About() {
   return (
     <section className="py-24 px-6 md:px-12 bg-brand-bg relative">
       <div className="max-w-[1200px] mx-auto">
-        
+
         {/* Section Header */}
         <div id="about" className="text-center mb-20">
           <div className="inline-flex items-center justify-center space-x-2 text-[10px] tracking-[0.25em] text-brand-bronze uppercase mb-4">
@@ -18,15 +18,15 @@ export default function About() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          
+
           {/* Crafts Museum */}
           <div
             className="flex flex-col space-y-8"
           >
             <div className="border-b border-brand-bronze/20 pb-4">
-              <h3 className="text-2xl font-serif font-medium text-brand-charcoal">Crafts Museum</h3>
+              <h3 className="text-2xl font-serif font-medium text-brand-charcoal">Sudarshan Crafts Museum</h3>
             </div>
-            
+
             <div className="space-y-6">
               <div>
                 <h4 className="text-[10px] tracking-[0.2em] uppercase text-brand-bronze mb-2">Established</h4>
@@ -56,9 +56,9 @@ export default function About() {
             className="flex flex-col space-y-8"
           >
             <div className="border-b border-brand-bronze/20 pb-4">
-              <h3 className="text-2xl font-serif font-medium text-brand-charcoal">Arts and Crafts Village</h3>
+              <h3 className="text-2xl font-serif font-medium text-brand-charcoal">Sudarshan Arts and Crafts Village</h3>
             </div>
-            
+
             <div className="space-y-6">
               <div>
                 <h4 className="text-[10px] tracking-[0.2em] uppercase text-brand-bronze mb-2">Established</h4>

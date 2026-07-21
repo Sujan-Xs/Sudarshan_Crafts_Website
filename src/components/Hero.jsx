@@ -11,6 +11,7 @@ export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isPioneerExpanded, setIsPioneerExpanded] = useState(false);
   const photos = {}; // Removed dynamic photos since admin panel now only manages gallery statues
 
   useEffect(() => {
@@ -218,9 +219,9 @@ export default function Hero() {
 
         {/* Pioneer Section */}
         <div className="bg-brand-secondary/30 py-20 px-6 md:px-12 border-t border-b border-brand-bronze/10 mt-12 relative z-10">
-          <div className="max-w-[900px] mx-auto space-y-8">
-            <div className="text-center space-y-6 mb-12">
-              <div className="inline-flex items-center justify-center space-x-2 text-[10px] md:text-xs tracking-[0.25em] text-brand-bronze uppercase">
+          <div className="max-w-[1000px] mx-auto space-y-8">
+            <div className="text-left space-y-6 mb-8">
+              <div className="inline-flex items-center justify-start space-x-2 text-[10px] md:text-xs tracking-[0.25em] text-brand-bronze uppercase">
                 <span className="w-1 h-1 rounded-full bg-brand-bronze" />
                 <span>Pioneer</span>
                 <span className="w-1 h-1 rounded-full bg-brand-bronze" />
@@ -230,41 +231,94 @@ export default function Hero() {
                 Shri Sudarshan Sahoo
               </h2>
 
-              <div className="h-[1px] w-24 bg-brand-bronze/30 mx-auto" />
+              <div className="h-[1px] w-24 bg-brand-bronze/30" />
             </div>
 
             <div className="text-sm md:text-base text-brand-grey font-light leading-relaxed space-y-6 text-justify">
+
+              {/* Floated Photo Container */}
+              <div className="float-none lg:float-right w-full lg:w-[360px] lg:ml-12 mb-8 lg:mb-4 relative group clear-both lg:clear-none">
+                <div className="aspect-[3/4] w-full relative">
+                  <div className="absolute -inset-3 border border-brand-bronze/20 z-0 pointer-events-none" />
+                  <div className="absolute inset-0 bg-brand-sand/30 flex items-center justify-center z-10 overflow-hidden border border-brand-bronze/10">
+                    <img
+                      src="/images/sudarshan-sahoo.avif"
+                      alt="Shri Sudarshan Sahoo"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                    <div className="w-full h-full flex-col items-center justify-center text-brand-charcoal/50 hidden text-center px-4">
+                      <span className="text-xs uppercase tracking-[0.2em] mb-2 font-medium block">Photo Placement</span>
+                      <span className="text-[10px] font-light">Add 'sudarshan-sahoo.avif' to public/images</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 text-center lg:text-center">
+                  <span className="text-[9px] tracking-[0.15em] text-brand-bronze/80 uppercase font-light">
+                    Founder & Master Craftsman
+                  </span>
+                </div>
+              </div>
+
               <p>
-                He is a traditional Master Craftsman working in stone, wood, and other media. At the age of 13, he was initiated into the craft of stone carving by his teachers and gurus, Late Shri Kunia Moharana and Late Shri Bhubaneswar Mahapatra of Puri. He has been practicing this craft for more than seven decades, acquiring exceptional skill and mastery in carving statues of deities for temples as well as decorative artifacts. He is also well-versed in ancient scriptures, particularly Hindu and Buddhist literature.
+                Sudarshan Sahoo is a renowned sculptor, master craftsman who works on Stone and Wood. At the age of thirteen he was initiated to the craft of stone carving by his Guru Late Shri Kunia Moharana and Late Shri Bhubaneswar Mahapatra of Puri. He has been practicing the craft for more than seven decades and has acquired skill and mastery in carving statues of deities for temples in Kalingan style of temple architecture. He is an erudite in scriptures of lore, especially in Hindu & Buddhist mythology.
               </p>
 
               <p>
-                In 1971, he carved the Jataka stories of Lord Buddha at the Dhauli Peace Pagoda near Bhubaneswar. Thereafter, he visited Japan several times at the invitation of the Japan Buddha Sangha, where he created stone statues and murals for Buddhist temples and stupas. In 1980, along with his students, he visited England at the invitation of Buddha Sangha, London, and carved the Jataka Tales at the Buddhist Pagoda in Milton Keynes. In 1992, he created life-story panels of Buddha in stone and fiberglass for the Darjeeling Peace Pagoda. In 1993, he installed fiberglass statues at Wardha Peace Pagoda, inaugurated by the Hon'ble President of India. In 1994, he completed the beautification of the Hanaokayama Pagoda in Japan. In 1996, he created gold-plated fiberglass statues for Buddhist temples in Delhi and the Vaishali (Bihar) Stupa. In 1998, he constructed a monumental stone gate measuring 36 ft x 36 ft at Barunei, Odisha. A granite monolith statue of Bhagwan Parasnath, which took seven years to complete, was installed at Pushpagiri Vihar, Madhya Pradesh, earning appreciation from religious preachers and art connoisseurs. Recently, a 101-foot-long Buddha Jataka Story mural project was completed at a spiritual park near Mumbai. His artworks have also adorned numerous public and private spaces, including temples, homes, offices, museums, airports, and community centers in India and abroad.
+                In 1971, he had carved scenes from Jataka tales of Lord Buddha at Dhauli Peace Pagoda. He went to Japan several times at the invitation of Japan Buddha Sangha and has carved stone statues and murals for the Buddhist Temples and Stupas. In the year 1980, he along with his assisting students visited England at the invitation of Buddha Sangha, London and carved the Jataka Tales at the Buddhist Pagoda at Milton Keynes. He carved life story panels of Buddha in Stone and Fiber Glass for Darjeeling Peace Pagoda in 1992, and installed Fiberglass statues at Wardha Peace Pagoda in 1993, which was inaugurated by the Hon’ble President of India. In 1994, he completed the beautification of Hanaokayama Pagoda of Japan. In 1996, he completed gold plated fiberglass statues for Buddhist Temples in Delhi and Vaishali (Bihar) Stupa. In 1998, he created a Monumental Stone Gate at Barunei, Odisha. A granite monolith statue of Bhagwan Parshwanath which took 10 years was installed at Pushpagiri Vihar, Madhya Pradesh.
               </p>
 
-              <p>
-                To promote the craft, he established a training-cum-production center named Sudarshan Crafts Museum in 1977 at Puri. The center produces stone and wood carvings, paintings, and fiberglass statues. It provides training to students from traditional artist communities, economically weaker sections, and individuals with special abilities. A group of skilled craftsmen trained under him continues to work there. In 1985, a Buddhist temple was established within the center and decorated with gold-plated wood carvings, attracting many visitors.
-              </p>
+              <AnimatePresence>
+                {isPioneerExpanded && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="space-y-6 overflow-hidden origin-top"
+                  >
+                    <p>
+                      For further development of this craft, a training-cum-production centre named SUDARSHAN CRAFTS MUSEUM was set up in the year 1977 at Puri. Practioners of this art including people from traditional artist communities, young people with a zeal to learn, students from economically weaker sections and people with special abilities are imparted training as per their interest. In 1985, we constructed a Japanese Buddhist Temple on the Nipponzan Myohoji philosophy at this centre and decorated it with gold plated wood carvings which draws lot of tourists to this artistic monument.
+                    </p>
 
-              <p>
-                In 1991, he founded Sudarshan Art & Crafts Village in Bhubaneswar, based on the Guru–Shishya tradition, where teachers and students live and work together. The center includes an art gallery, showroom, training center, research center, library, and hostel facilities. Each year, 10 students are trained free of cost, with plans to expand to 50. Special emphasis is given to empowering economically disadvantaged individuals and people with special abilities. He continues to reside at the Crafts Village, developing it gradually. Many of his students have received national and state awards and continue to work alongside him.
-              </p>
+                    <div className="flex justify-center text-brand-bronze text-sm py-4">
+                      - 02 -
+                    </div>
 
-              <p>
-                He has participated in numerous demonstrations, lectures, skill development programs, and exhibitions in India and abroad, including the Festival of India in the USA in 1986. His solo exhibitions at Jehangir Art Gallery, Mumbai, were widely appreciated. His works were also exhibited at Ravindra Bharathi, Hyderabad (1996), Karnataka Chitrakala Parishath, Bangalore (1997), and Bal Gandharva Kala Mandir, Pune (1999). A group exhibition with his sons, Rabi and Surya, at Jehangir Art Gallery in 2011 received critical acclaim. To promote traditional art globally, he launched the website <a href="http://www.sudarshancrafts.com" target="_blank" rel="noopener noreferrer" className="text-brand-bronze hover:underline">www.sudarshancrafts.com</a>.
-              </p>
+                    <p>
+                      In 1991, Mr Sahoo set up SUDARSHAN ART & CRAFTS VILLAGE in Bhubaneswar. He conceived an idea of a village where new learners were trained by skilled artisans in ancient Guru–Shishya parampara style. The centre consists of a research and training centre, art gallery, showroom & hostel for artists. Several of Mr Sahoo’s students have received National Awards, State Awards and other citations.
+                    </p>
 
-              <p>
-                His contributions have been widely recognized. In 1976, he was honored with Shreekhetra Shree by the people of Puri. In 1981, he received the National Award for Stone Carving from the President of India. In 1986, he was presented the Liberty Bell by the Mayor of Philadelphia, USA. In 1988, he was awarded the Padma Shri by the President of India for his outstanding contribution to Indian art and crafts. In 2003, he received the Kamaladevi Chattopadhyay Award and the Shilpguru Award from the Vice-President of India. In 2011, Utkal University of Culture conferred upon him an honorary D.Litt degree. In 2012, he was honored with the Priya Odia title by ETV and selected for the Dharmapada Award by Odisha Lalit Kala Akademi. In 2018, he was appointed Chairman of the Odisha Handloom and Handicrafts Development and Promotion Council. A pictorial biography titled "Sudarshan Sahoo – A Legacy Set in Stone" was published the same year. In 2021, he was conferred with the Padma Vibhushan by the President of India for his lifelong contribution to art and crafts.
-              </p>
+                    <p>
+                      Sudarshan Sahoo attended demonstrations, lectures, skill development programmes and exhibitions across India and beyond including the Festival of India in the U.S.A. in 1986. He also held solo exhibitions at the Jehangir Art Gallery, Mumbai which attracts art lovers from the city. Apart from that, exhibitions were conducted in 1996 at Ravindra Bharathi, Hyderabad, in 1997 at Karnataka Chitrakala Parishath, Bangalore and in 1999, at Bal Gandharva Kala Mandir, Pune. To spread the age-old we have a website <a href="http://www.sudarshancrafts.com" target="_blank" rel="noopener noreferrer" className="text-brand-bronze hover:underline">www.sudarshancrafts.com</a> for the art lovers where different aspects of our creations are displayed.
+                    </p>
 
-              <p>
-                Over the past seven decades, he has trained more than 400 students and continues to promote this art form among future generations. Along with his students, he regularly conducts demonstrations and lectures to popularize traditional craftsmanship globally. He remains dedicated to preserving and advancing the heritage of art and crafts, inspiring students, family members, and fellow artists to uphold and restore traditional artistic practices for generations to come.
-              </p>
+                    <p>
+                      In the year 1976, people of Puri conferred Shreekhetra Shree and in 1981, President of India presented National Award for Stone Carving. Mayor of Philadelphia, USA presented Liberty Bell in 1986. For our outstanding contribution towards art and crafts of India in 1988, President of India awarded Padmashree. In the year 2003 Kamaladevi Chottopadhya Award was presented on her birth centenary. The Vice-President of India has conferred on me the Shilpguru Award for the year 2003. In the year 2011 Utkal University of Culture, Bhubaneswar conferred the Honorary D.Litt degree. He has been felicitated with Priya Odia (most adorable Odia) title for the year 2012 by ETV channel. He has been selected for prestigious Dharmapada Award by Odisha Lalit Kala Akademi for the year 2012. In 2018 he was appointed Chairman of Odisha Handloom and Handicrafts Development and Promotion Council. A pictorial biogaphy “Sudarshan Sahoo – a legacy set in stone” was published in the year 2018 which depicts his life and work in a visual form. In 2021 he was conferred with the Padma Vibhushan award by the President of India for his lifelong contribution towards art & crafts of India.
+                    </p>
 
-              <p className="text-center font-medium mt-10 text-brand-charcoal italic">
-                May this rich heritage continue to flourish.
-              </p>
+                    <p>
+                      In last seven decades, He has trained more than 400 students and He is trying his best to popularise this art among the future generation. Along with him his students are regularly offering craft demonstrations and lectures to popularise this art form globally. For keeping the heritage of art and crafts alive, he is trying and inspiring his students, family members and artists to be fine craftsmen to keep alive and develop our art and crafts and to restore our old temples and art objects for centuries to come.
+                    </p>
+
+                    <p className="text-center font-medium mt-10 text-brand-charcoal italic clear-both">
+                      May this rich heritage flourish.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="flex justify-center pt-8 clear-both">
+                <button
+                  onClick={() => setIsPioneerExpanded(!isPioneerExpanded)}
+                  className="px-6 py-2 border border-brand-bronze/50 text-brand-bronze text-xs uppercase tracking-[0.2em] hover:bg-brand-bronze hover:text-white transition-colors duration-300"
+                >
+                  {isPioneerExpanded ? 'Read Less' : 'Read More'}
+                </button>
+              </div>
             </div>
           </div>
         </div>

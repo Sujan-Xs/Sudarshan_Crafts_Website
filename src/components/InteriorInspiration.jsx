@@ -131,9 +131,6 @@ export default function InteriorInspiration() {
       {/* Section Header */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end border-b luxury-divider pb-12 mb-16">
         <div className="max-w-xl space-y-4">
-          <span className="text-[10px] tracking-[0.3em] text-brand-bronze uppercase block font-light">
-            05 // SPATIAL ARCHITECTURE
-          </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-light text-brand-charcoal">
             Sculptural Inspirations
           </h2>
@@ -227,9 +224,6 @@ export default function InteriorInspiration() {
                     {item.statueName}
                   </h4>
                 </div>
-                <span className="text-[9px] tracking-[0.1em] text-brand-bronze italic font-serif">
-                  0{String(item.id).replace('bulk-', '').replace('custom-', '')}
-                </span>
               </div>
             </div>
           ))}

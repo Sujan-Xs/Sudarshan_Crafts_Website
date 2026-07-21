@@ -23,7 +23,7 @@ export default {
       },
       fontFamily: {
         serif: ['"Cormorant Garamond"', '"Playfair Display"', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Playfair Display"', 'serif'],
         navbar: ['"Source Serif 4"', 'serif'],
       },
       letterSpacing: {

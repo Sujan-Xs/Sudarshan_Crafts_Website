@@ -111,7 +111,7 @@ export default function AdminPanel() {
   };
 
   const handleSave = async () => {
-    if (preview && file && statueName && statueDescription && statueMaterial) {
+    if (preview && file) {
       setIsUploading(true);
       try {
         const publicUrl = await uploadToCloud(file);
@@ -134,7 +134,7 @@ export default function AdminPanel() {
         setIsUploading(false);
       }
     } else {
-      alert('Please provide a photo, a name, a material, and a description.');
+      alert('Please provide a photo to upload.');
     }
   };
 
@@ -252,7 +252,7 @@ export default function AdminPanel() {
             
             <button 
               onClick={handleSave}
-              disabled={!preview || !statueName || !statueDescription || !statueMaterial}
+              disabled={!preview || isUploading}
               className="w-full bg-brand-bronze text-white uppercase text-xs tracking-[0.2em] py-4 hover:bg-white hover:text-black transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span>Add to Gallery</span>
@@ -290,7 +290,7 @@ export default function AdminPanel() {
             statues.map((statue, idx) => (
               <div
                 key={statue.id}
-                className="relative group overflow-hidden w-full break-inside-avoid border border-brand-bronze/10 bg-brand-sand/15 transition-all duration-500 hover:border-brand-bronze/35 hover:shadow-lg"
+                className={`relative group overflow-hidden w-full break-inside-avoid border border-brand-bronze/10 bg-brand-sand/15 transition-all duration-500 hover:border-brand-bronze/35 hover:shadow-lg`}
               >
                 {/* Delete Button - Absolute Top Right */}
                 <button 
@@ -305,10 +305,10 @@ export default function AdminPanel() {
                 <div className="absolute top-4 left-4 right-4 bottom-4 border border-brand-bronze/5 pointer-events-none transition-all duration-500 group-hover:border-brand-bronze/15 z-20" />
 
                 {/* Content Area */}
-                <div className="relative overflow-hidden flex items-center justify-center bg-brand-bg">
+                <div className="relative overflow-hidden flex items-center justify-center">
                   <img
                     src={statue.image}
-                    alt={statue.statueName}
+                    alt={statue.statueName || 'Gallery Statue'}
                     className="w-full h-auto block transition-transform duration-[1.5s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110"
                   />
 
@@ -333,15 +333,12 @@ export default function AdminPanel() {
                 </div>
 
                 {/* Caption beneath images when not hovered */}
-                <div className="p-5 border-t border-brand-bronze/10 flex justify-between items-center bg-brand-bg">
+                <div className="p-5 border-t border-brand-bronze/10 flex justify-between items-center bg-brand-bg/50">
                   <div>
                     <h4 className="text-xs uppercase tracking-[0.2em] font-medium text-brand-charcoal">
-                      {statue.statueName}
+                      {statue.statueName || 'Untitled Artwork'}
                     </h4>
                   </div>
-                  <span className="text-[9px] tracking-[0.1em] text-brand-bronze italic font-serif">
-                    0{idx + 1}
-                  </span>
                 </div>
               </div>
             ))
