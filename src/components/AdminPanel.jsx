@@ -11,7 +11,6 @@ export default function AdminPanel() {
   const [preview, setPreview] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [statueName, setStatueName] = useState('');
-  const [statueMaterial, setStatueMaterial] = useState('');
   const [statueDescription, setStatueDescription] = useState('');
   
   // Authentication State
@@ -117,14 +116,12 @@ export default function AdminPanel() {
         const publicUrl = await uploadToCloud(file);
         await addStatue({
           statueName: statueName,
-          material: statueMaterial,
           description: statueDescription,
           image: publicUrl
         });
         setPreview(null);
         setFile(null);
         setStatueName('');
-        setStatueMaterial('');
         setStatueDescription('');
         alert('Statue added successfully to the gallery!');
         setActiveTab('gallery');
@@ -210,17 +207,6 @@ export default function AdminPanel() {
                 value={statueName}
                 onChange={(e) => setStatueName(e.target.value)}
                 placeholder="e.g. Vinayaka in Makrana Marble"
-                className="w-full bg-[#1A1A17] border border-brand-bronze/20 text-white p-4 focus:outline-none focus:border-brand-bronze"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <label className="text-xs text-brand-grey uppercase tracking-[0.15em]">Material</label>
-              <input 
-                type="text"
-                value={statueMaterial}
-                onChange={(e) => setStatueMaterial(e.target.value)}
-                placeholder="e.g. Makrana Marble"
                 className="w-full bg-[#1A1A17] border border-brand-bronze/20 text-white p-4 focus:outline-none focus:border-brand-bronze"
               />
             </div>

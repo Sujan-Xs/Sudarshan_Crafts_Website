@@ -77,14 +77,10 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center">
 
           {/* Brand Logo & Name */}
-            {/* Brand Logo & Name Placeholder */}
-            <div className="flex items-center space-x-3 group cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
-              <div className="h-10 w-40 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
-                <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">
-                  Museum Logo<br/>Placeholder
-                </span>
-              </div>
-            </div>
+          {/* Brand Logo & Name */}
+          <div className="flex items-center space-x-3 group cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
+            <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="h-10 w-auto object-contain" />
+          </div>
 
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center space-x-10">
@@ -100,13 +96,9 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right Logo (SACV) Placeholder */}
+          {/* Right Logo (SACV) */}
           <div className="hidden lg:flex items-center space-x-3 text-right cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home (Art & Crafts Village)">
-            <div className="h-10 w-48 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
-              <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">
-                Art & Crafts Village<br/>Logo Placeholder
-              </span>
-            </div>
+            <img src="/images/sacv-logo.avif" alt="Sudarshan Arts and Crafts Village Logo" className="h-10 w-auto object-contain" />
           </div>
 
           {/* Mobile Menu Icon */}
@@ -122,75 +114,67 @@ export default function Navbar() {
 
       {/* Fullscreen Mobile Menu Overlay */}
       {mobileMenuOpen && (
-          <div
-            className="fixed inset-0 z-[100] bg-brand-bg/98 backdrop-blur-lg flex flex-col justify-between p-8 md:p-16 lg:hidden"
-          >
-            {/* Header in Mobile Menu Placeholder */}
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center space-x-3 cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
-                <div className="h-10 w-40 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
-                  <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">
-                    Museum Logo<br/>Placeholder
-                  </span>
-                </div>
-              </div>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 text-[#694125] hover:text-brand-bronze transition-colors border border-brand-bronze/10 rounded-full"
-                aria-label="Close navigation menu"
-              >
-                <X className="w-6 h-6 stroke-[1.25]" />
-              </button>
+        <div
+          className="fixed inset-0 z-[100] bg-brand-bg/98 backdrop-blur-lg flex flex-col justify-between p-8 md:p-16 lg:hidden"
+        >
+          {/* Header in Mobile Menu */}
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center space-x-3 cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
+              <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="h-10 w-auto object-contain" />
             </div>
-
-            {/* Navigation links - vertical with large typography */}
-            <div className="flex flex-col justify-center space-y-6 md:space-y-8 my-auto">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-brand-grey/60 font-light border-b luxury-divider pb-2 w-1/4">
-                Explore Menu
-              </span>
-              {navLinks.map((link, idx) => (
-                <div
-                  key={link.name}
-                >
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleScrollTo(e, link.href.substring(1))}
-                    className="text-3xl md:text-4xl font-navbar font-bold text-[#694125] hover:text-brand-bronze transition-colors duration-300 block py-1"
-                  >
-                    {link.name}
-                  </a>
-                </div>
-              ))}
-
-              <div
-                className="pt-4 flex items-center space-x-3 cursor-pointer"
-                onClick={(e) => handleScrollTo(e, 'home')}
-                role="button" 
-                tabIndex="0" 
-                aria-label="Go to home (Art & Crafts Village)"
-              >
-                <div className="h-10 w-48 border border-dashed border-brand-bronze/40 flex items-center justify-center bg-brand-bronze/5 rounded">
-                  <span className="text-[9px] uppercase tracking-[0.1em] text-brand-bronze font-light text-center px-1 leading-tight">
-                    Art & Crafts Village<br/>Logo Placeholder
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer in Mobile Menu */}
-            <div className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 border-t luxury-divider pt-6 text-[10px] tracking-[0.25em] uppercase text-brand-grey font-light">
-              <div>
-                <span>Architectural & Fine Art</span>
-              </div>
-              <div className="flex space-x-6">
-                <a href="#instagram" className="hover:text-brand-bronze transition-colors">Instagram</a>
-                <a href="#pinterest" className="hover:text-brand-bronze transition-colors">Pinterest</a>
-                <a href="#catalogue" className="hover:text-brand-bronze transition-colors">Catalogue</a>
-              </div>
-            </div>
-
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-1.5 text-[#694125] hover:text-brand-bronze transition-colors border border-brand-bronze/10 rounded-full"
+              aria-label="Close navigation menu"
+            >
+              <X className="w-6 h-6 stroke-[1.25]" />
+            </button>
           </div>
-        )}
-      </>
+
+          {/* Navigation links - vertical with large typography */}
+          <div className="flex flex-col justify-center space-y-6 md:space-y-8 my-auto">
+            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-grey/60 font-light border-b luxury-divider pb-2 w-1/4">
+              Explore Menu
+            </span>
+            {navLinks.map((link, idx) => (
+              <div
+                key={link.name}
+              >
+                <a
+                  href={link.href}
+                  onClick={(e) => handleScrollTo(e, link.href.substring(1))}
+                  className="text-3xl md:text-4xl font-navbar font-bold text-[#694125] hover:text-brand-bronze transition-colors duration-300 block py-1"
+                >
+                  {link.name}
+                </a>
+              </div>
+            ))}
+
+            <div
+              className="pt-4 flex items-center space-x-3 cursor-pointer"
+              onClick={(e) => handleScrollTo(e, 'home')}
+              role="button"
+              tabIndex="0"
+              aria-label="Go to home (Art & Crafts Village)"
+            >
+              <img src="/images/sacv-logo.avif" alt="Sudarshan Arts and Crafts Village Logo" className="h-10 w-auto object-contain" />
+            </div>
+          </div>
+
+          {/* Footer in Mobile Menu */}
+          <div className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 border-t luxury-divider pt-6 text-[10px] tracking-[0.25em] uppercase text-brand-grey font-light">
+            <div>
+              <span>Architectural & Fine Art</span>
+            </div>
+            <div className="flex space-x-6">
+              <a href="#instagram" className="hover:text-brand-bronze transition-colors">Instagram</a>
+              <a href="#pinterest" className="hover:text-brand-bronze transition-colors">Pinterest</a>
+              <a href="#catalogue" className="hover:text-brand-bronze transition-colors">Catalogue</a>
+            </div>
+          </div>
+
+        </div>
+      )}
+    </>
   );
 }

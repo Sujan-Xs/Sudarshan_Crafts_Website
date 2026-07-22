@@ -192,14 +192,7 @@ export default function Hero() {
                 {/* Photo 1 */}
                 <div className="aspect-[2/3] bg-brand-secondary/50 border border-brand-bronze/20 flex flex-col items-center justify-center p-4 text-center group overflow-hidden relative">
                   <div className="absolute inset-0 bg-brand-bronze/5 transition-opacity group-hover:opacity-100 opacity-0 z-20 pointer-events-none" />
-                  {photos.hero_bust ? (
-                    <img src={photos.hero_bust} alt="Photo of PSS (Bust)" className="absolute inset-0 w-full h-full object-cover z-10" />
-                  ) : (
-                    <>
-                      <span className="text-xs font-serif italic text-brand-charcoal/60 relative z-10">Photo of PSS (Bust)</span>
-                      <span className="text-[9px] uppercase tracking-[0.2em] text-brand-bronze mt-2 relative z-10">Placeholder</span>
-                    </>
-                  )}
+                  <img src="/images/IMG_3423.avif" alt="Photo of PSS (Bust)" className="absolute inset-0 w-full h-full object-cover z-10" />
                 </div>
 
                 {/* Photo 2 */}
@@ -285,7 +278,7 @@ export default function Hero() {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="space-y-6 overflow-hidden origin-top"
+                    className="space-y-6 origin-top"
                   >
                     <p>
                       For further development of this craft, a training-cum-production centre named SUDARSHAN CRAFTS MUSEUM was set up in the year 1977 at Puri. Practioners of this art including people from traditional artist communities, young people with a zeal to learn, students from economically weaker sections and people with special abilities are imparted training as per their interest. In 1985, we constructed a Japanese Buddhist Temple on the Nipponzan Myohoji philosophy at this centre and decorated it with gold plated wood carvings which draws lot of tourists to this artistic monument.

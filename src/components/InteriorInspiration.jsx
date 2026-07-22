@@ -148,21 +148,7 @@ export default function InteriorInspiration() {
         </div>
       </div>
 
-      {/* Filter Options */}
-      <div className="flex flex-wrap gap-6 mb-16 items-center justify-center lg:justify-start">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => setActiveCategory(category)}
-            className={`text-xs uppercase tracking-[0.2em] font-light pb-2 transition-all duration-300 relative ${activeCategory === category
-                ? 'text-brand-bronze font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-brand-bronze'
-                : 'text-brand-grey hover:text-brand-charcoal'
-              }`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+
 
       {/* Modern Pinterest Masonry Column Grid or Empty State */}
       {filteredItems.length > 0 ? (
@@ -198,35 +184,17 @@ export default function InteriorInspiration() {
                   </div>
                 )}
 
-                {/* Luxury Blur Overlay with Editorial Narrative */}
-                <div className="absolute inset-0 bg-brand-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-between p-8 z-10">
-
-                  {/* Body details in Overlay */}
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-serif text-white font-light">
-                      {item.statueName}
-                    </h3>
-                    <div className="w-8 h-[1px] bg-brand-bronze" />
-                    <p className="text-[11px] text-brand-sand/80 font-light leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="flex justify-end mt-auto pt-4">
-                    <span className="text-[9px] tracking-[0.2em] uppercase text-white/50 border-b border-brand-bronze/30 pb-1">
-                      {item.material}
-                    </span>
-                  </div>
-                </div>
               </div>
 
-              {/* Caption beneath images when not hovered */}
-              <div className="p-5 border-t border-brand-bronze/10 flex justify-between items-center bg-brand-bg/50">
-                <div>
-                  <h4 className="text-xs uppercase tracking-[0.2em] font-medium text-brand-charcoal">
-                    {item.statueName}
-                  </h4>
-                </div>
+              {/* Caption beneath images */}
+              <div className="p-5 border-t border-brand-bronze/10 bg-brand-bg/50 flex flex-col space-y-3">
+                <h4 className="text-xs uppercase tracking-[0.15em] font-medium text-brand-charcoal pr-4">
+                  {item.statueName}
+                </h4>
+                <div className="w-8 h-[1px] bg-brand-bronze" />
+                <p className="text-[11px] text-brand-grey font-light leading-relaxed">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}
