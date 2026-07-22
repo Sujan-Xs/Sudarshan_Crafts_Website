@@ -77,9 +77,8 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-center">
 
           {/* Brand Logo & Name */}
-          {/* Brand Logo & Name */}
           <div className="flex items-center space-x-3 group cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
-            <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="h-10 w-auto object-contain" />
+            <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="h-10 w-auto object-contain" fetchPriority="high" loading="eager" />
           </div>
 
           {/* Desktop Nav Links */}
@@ -98,7 +97,7 @@ export default function Navbar() {
 
           {/* Right Logo (SACV) */}
           <div className="hidden lg:flex items-center space-x-3 text-right cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home (Art & Crafts Village)">
-            <img src="/images/sacv-logo.avif" alt="Sudarshan Arts and Crafts Village Logo" className="h-10 w-auto object-contain" />
+            <img src="/images/sacv-logo.avif" alt="Sudarshan Arts and Crafts Village Logo" className="h-10 w-auto object-contain" fetchPriority="high" loading="eager" />
           </div>
 
           {/* Mobile Menu Icon */}
@@ -120,7 +119,7 @@ export default function Navbar() {
           {/* Header in Mobile Menu */}
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center space-x-3 cursor-pointer" onClick={(e) => handleScrollTo(e, 'home')} role="button" tabIndex="0" aria-label="Go to home">
-              <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="h-10 w-auto object-contain" />
+              <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="h-10 w-auto object-contain" fetchPriority="high" loading="eager" />
             </div>
             <button
               onClick={() => setMobileMenuOpen(false)}
@@ -157,7 +156,7 @@ export default function Navbar() {
               tabIndex="0"
               aria-label="Go to home (Art & Crafts Village)"
             >
-              <img src="/images/sacv-logo.avif" alt="Sudarshan Arts and Crafts Village Logo" className="h-10 w-auto object-contain" />
+              <img src="/images/sacv-logo.avif" alt="Sudarshan Arts and Crafts Village Logo" className="h-10 w-auto object-contain" fetchPriority="high" loading="eager" />
             </div>
           </div>
 

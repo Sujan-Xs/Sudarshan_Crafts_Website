@@ -137,20 +137,20 @@ export default function Hero() {
         </button>
       </section>
 
-      <section id="home" className="flex flex-col relative overflow-hidden bg-brand-bg">
+      <section id="home" className="flex flex-col relative overflow-hidden bg-[#DFD3C3]">
         {/* Background elegant gradient elements */}
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full bg-brand-sand/20 blur-[150px] pointer-events-none" />
 
         {/* Main Hero Fold */}
         <div className="flex flex-col justify-center pt-6 md:pt-5 pb-16 px-6 md:px-12 relative z-10">
-          <div className="max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center mt-[30px]">
+          <div className="max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mt-[30px]">
 
             {/* Left Column: Heading and Story */}
             <div className="lg:col-span-6 flex flex-col">
 
 
               <h1
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-navbar font-light leading-[1.1] text-brand-charcoal mb-6"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-navbar font-light leading-[1.1] text-brand-charcoal mb-6"
                 style={{ fontFamily: '"Source Serif 4", serif' }}
               >
                 Welcome to<br />
@@ -197,15 +197,7 @@ export default function Hero() {
 
                 {/* Photo 2 */}
                 <div className="aspect-[2/3] bg-brand-secondary/50 border border-brand-bronze/20 flex flex-col items-center justify-center p-4 text-center group overflow-hidden relative translate-y-12">
-                  <div className="absolute inset-0 bg-brand-bronze/5 transition-opacity group-hover:opacity-100 opacity-0 z-20 pointer-events-none" />
-                  {photos.hero_na ? (
-                    <img src={photos.hero_na} alt="Photo of PSS N/A" className="absolute inset-0 w-full h-full object-cover z-10" />
-                  ) : (
-                    <>
-                      <span className="text-xs font-serif italic text-brand-charcoal/60 relative z-10">Photo of PSS N/A</span>
-                      <span className="text-[9px] uppercase tracking-[0.2em] text-brand-bronze mt-2 relative z-10">Placeholder</span>
-                    </>
-                  )}
+                  <img src="/images/gallery_custom_36_trimmed.avif" alt="Photo of PSS N/A" className="absolute inset-0 w-full h-full object-cover z-10" />
                 </div>
               </div>
             </div>
@@ -213,7 +205,7 @@ export default function Hero() {
         </div>
 
         {/* Pioneer Section */}
-        <div className="bg-brand-secondary/30 py-20 px-6 md:px-12 border-t border-b border-brand-bronze/10 mt-12 relative z-10">
+        <div className="bg-[#6E4A2E] py-20 px-6 md:px-12 border-t border-b border-brand-bronze/10 mt-12 relative z-10">
           <div className="max-w-[1000px] mx-auto space-y-8">
             <div className="text-left space-y-6 mb-8">
               <div className="inline-flex items-center justify-start space-x-2 text-[10px] md:text-xs tracking-[0.25em] text-brand-bronze uppercase">
@@ -222,14 +214,14 @@ export default function Hero() {
                 <span className="w-1 h-1 rounded-full bg-brand-bronze" />
               </div>
 
-              <h2 className="text-3xl md:text-4xl font-serif font-light text-brand-charcoal">
+              <h2 className="text-3xl md:text-4xl font-serif font-light text-brand-bg">
                 Shri Sudarshan Sahoo
               </h2>
 
               <div className="h-[1px] w-24 bg-brand-bronze/30" />
             </div>
 
-            <div className="text-sm md:text-base text-brand-grey font-light leading-relaxed space-y-6 text-justify">
+            <div className="text-sm md:text-base text-brand-bg/90 font-light leading-relaxed space-y-6 text-justify">
 
               {/* Floated Photo Container */}
               <div className="float-none lg:float-right w-full lg:w-[360px] lg:ml-12 mb-8 lg:mb-4 relative group clear-both lg:clear-none">
@@ -250,14 +242,14 @@ export default function Hero() {
                         e.target.nextSibling.style.display = 'flex';
                       }}
                     />
-                    <div className="w-full h-full flex-col items-center justify-center text-brand-charcoal/50 hidden text-center px-4">
+                    <div className="w-full h-full flex-col items-center justify-center text-brand-bg/60 hidden text-center px-4">
                       <span className="text-xs uppercase tracking-[0.2em] mb-2 font-medium block">Photo Placement</span>
                       <span className="text-[10px] font-light">Add 'sudarshan-sahoo.avif' to public/images</span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-6 text-center lg:text-center">
-                  <span className="text-[9px] tracking-[0.15em] text-brand-bronze/80 uppercase font-light">
+                  <span className="text-[9px] tracking-[0.15em] text-white uppercase font-light">
                     Founder & Master Craftsman
                   </span>
                 </div>
@@ -304,7 +296,7 @@ export default function Hero() {
                       In last seven decades, He has trained more than 400 students and He is trying his best to popularise this art among the future generation. Along with him his students are regularly offering craft demonstrations and lectures to popularise this art form globally. For keeping the heritage of art and crafts alive, he is trying and inspiring his students, family members and artists to be fine craftsmen to keep alive and develop our art and crafts and to restore our old temples and art objects for centuries to come.
                     </p>
 
-                    <p className="text-center font-medium mt-10 text-brand-charcoal italic clear-both">
+                    <p className="text-center font-medium mt-10 text-brand-bg italic clear-both">
                       May this rich heritage flourish.
                     </p>
                   </motion.div>
@@ -314,7 +306,7 @@ export default function Hero() {
               <div className="flex justify-center pt-8 clear-both">
                 <button
                   onClick={() => setIsPioneerExpanded(!isPioneerExpanded)}
-                  className="px-6 py-2 border border-brand-bronze/50 text-brand-bronze text-xs uppercase tracking-[0.2em] hover:bg-brand-bronze hover:text-white transition-colors duration-300"
+                  className="px-6 py-2 border border-brand-bronze/50 text-brand-bg hover:bg-brand-bronze hover:text-white transition-colors duration-300"
                 >
                   {isPioneerExpanded ? 'Read Less' : 'Read More'}
                 </button>

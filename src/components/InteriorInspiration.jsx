@@ -131,20 +131,15 @@ export default function InteriorInspiration() {
       {/* Section Header */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end border-b luxury-divider pb-12 mb-16">
         <div className="max-w-xl space-y-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-light text-brand-charcoal">
-            Sculptural Inspirations
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-serif font-light text-[#6E4A2E] italic"
+            style={{ fontFamily: '"Playfair Display", serif' }}
+          >
+            Sculptural Archive
           </h2>
-          <p className="text-sm text-brand-grey font-light leading-relaxed">
-            Witness how our bespoke creations inhabit premier architecture worldwide. We collaborate with designers to integrate heavy stone sculpture as a central design element.
+          <p className="text-sm text-[#6E4A2E]/90 font-light leading-relaxed">
+            Venture into our archive, home to numerous pieces of bespoke artistry.
           </p>
-        </div>
-        <div className="mt-6 lg:mt-0">
-          <span className="text-xs uppercase tracking-[0.2em] font-light text-brand-grey block">
-            GALLERY DOCUMENTATION
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.15em] font-light text-brand-bronze block mt-1 italic">
-            Architectural Placements
-          </span>
         </div>
       </div>
 

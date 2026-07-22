@@ -28,10 +28,10 @@ export default function Footer() {
           {/* SCM Contact Info */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
             <div className="space-y-4 md:pl-10">
-              <span className="text-[11px] tracking-[0.2em] uppercase text-brand-bronze font-medium">Sudarshan Crafts Museum</span>
-              <ul className="space-y-2 text-xs font-light text-brand-grey">
+              <img src="/images/scm-logo.avif" alt="Sudarshan Crafts Museum Logo" className="h-16 w-auto object-contain mb-4" loading="lazy" />
+              <ul className="space-y-2 text-sm text-brand-grey" style={{ fontFamily: '"Playfair Display", serif' }}>
                 <li><span className="block text-brand-charcoal/80">Station Road,</span></li>
-                <li><span className="block text-brand-charcoal/80"><b>Puri</b>, Odisha,</span></li>
+                <li><span className="block text-brand-charcoal/80"><strong className="font-extrabold">Puri</strong>, Odisha,</span></li>
                 <li><span className="block text-brand-charcoal/80">India-752 002</span></li>
                 <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 72474</span></li>
 
@@ -54,10 +54,10 @@ export default function Footer() {
           {/* SACV Contact Info */}
           <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
             <div className="space-y-4 md:pl-10">
-              <span className="text-[11px] tracking-[0.2em] uppercase text-brand-bronze font-medium">Sudarshan Art & Crafts Village</span>
-              <ul className="space-y-2 text-xs font-light text-brand-grey">
+              <img src="/images/sacv-logo.avif" alt="Sudarshan Art & Crafts Village Logo" className="h-16 w-auto object-contain mb-4" loading="lazy" />
+              <ul className="space-y-2 text-sm text-brand-grey" style={{ fontFamily: '"Playfair Display", serif' }}>
                 <li><span className="block text-brand-charcoal/80">CB-5, Jayadev Vihar</span></li>
-                <li><span className="block text-brand-charcoal/80"><b>Bhubaneswar</b>, Odisha,</span></li>
+                <li><span className="block text-brand-charcoal/80"><strong className="font-extrabold">Bhubaneswar</strong>, Odisha,</span></li>
                 <li><span className="block text-brand-charcoal/80">India-751 013</span></li>
                 <li className="pt-2"><span className="block text-brand-charcoal/80">M: +91 94370 36161</span></li>
 
