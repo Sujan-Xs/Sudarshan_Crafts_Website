@@ -68,7 +68,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#E0D3C3] font-navbar ${isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#E0D3C3]/80 backdrop-blur-md font-navbar ${isScrolled
           ? 'py-2 shadow-sm border-b luxury-divider'
           : 'py-3 md:py-4'
           }`}

@@ -93,7 +93,18 @@ export default function Hero() {
   return (
     <>
       {/* Full Screen Image Slider (Below Navbar) */}
-      <section className="relative w-full mt-[72px] h-[calc(100vh-72px)] overflow-hidden bg-brand-bg">
+      <section className="relative w-full mt-[64px] md:mt-[72px] h-[calc(100vh-64px)] md:h-[calc(100vh-72px)] overflow-hidden bg-brand-bg">
+        {/* Preload all slider images to ensure smooth transitions */}
+        <div style={{ display: 'none' }}>
+          {activeSliderImages.map((slide, idx) => (
+            <img
+              key={`preload-${slide.id || idx}`}
+              src={slide.image}
+              alt="preload"
+              fetchpriority={idx === 0 ? "high" : "low"}
+            />
+          ))}
+        </div>
         <AnimatePresence initial={false} custom={direction}>
           {activeSliderImages.length > 0 && (
             <motion.img
@@ -135,6 +146,23 @@ export default function Hero() {
         >
           <ChevronRight className="w-5 h-5 pl-[2px] group-hover:translate-x-1 transition-transform" />
         </button>
+
+        {/* Scroll Down Indicator */}
+        <button
+          onClick={() => {
+            const element = document.getElementById('home');
+            if (element) {
+              window.scrollTo({
+                top: element.offsetTop - 72, // Adjust for navbar height
+                behavior: 'smooth'
+              });
+            }
+          }}
+          className="absolute bottom-8 right-6 md:right-12 z-30 flex items-center space-x-3 text-white/80 hover:text-white transition-colors group cursor-pointer"
+        >
+          <span className="text-[10px] md:text-xs tracking-[0.2em] uppercase font-light">Scroll down for more</span>
+          <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+        </button>
       </section>
 
       <section id="home" className="flex flex-col relative overflow-hidden bg-[#DFD3C3]">
@@ -142,8 +170,8 @@ export default function Hero() {
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] rounded-full bg-brand-sand/20 blur-[150px] pointer-events-none" />
 
         {/* Main Hero Fold */}
-        <div className="flex flex-col justify-center pt-6 md:pt-5 pb-16 px-6 md:px-12 relative z-10">
-          <div className="max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mt-[30px]">
+        <div className="flex flex-col justify-center pt-16 md:pt-20 pb-24 md:pb-32 px-6 md:px-12 relative z-10">
+          <div className="max-w-[1400px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 items-start mt-[30px]">
 
             {/* Left Column: Heading and Story */}
             <div className="lg:col-span-6 flex flex-col">
@@ -158,7 +186,7 @@ export default function Hero() {
               </h1>
 
               <p
-                className="text-sm md:text-base text-brand-grey font-light max-w-xl leading-loose mb-8"
+                className="text-sm md:text-base text-black font-light max-w-xl leading-loose mb-8"
               >
                 Now we usher you into the most exotic surroundings that has recreated the ambience of the hoary past of Odisha Temple architectures and sculptures. The various statues of Gods & Goddesses, Natas (MALE DANCERS) & Natis (FEMALE DANCERS), Their smiles & moods and posture, tell you the history of the great stone crafts of Odisha and the people responsible for giving life to the stone and writing poetry on the temple walls.
               </p>
@@ -185,7 +213,7 @@ export default function Hero() {
             </div>
 
             {/* Right Column: 2 Photos Grid */}
-            <div className="lg:col-span-6 relative mt-12 lg:mt-2">
+            <div className="lg:col-span-6 relative mt-4 lg:mt-2">
               <div
                 className={`grid grid-cols-2 gap-6 transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
               >

@@ -37,8 +37,8 @@ function MainWebsite() {
   return (
     <div className="relative">
       <SEO 
-        title="Sudarshan Crafts | Premium Hindu Deity Stone Sculptures & Luxury Art Atelier"
-        description="Sudarshan Crafts designs premium handcrafted Hindu deity stone sculptures. Discover museum-grade white marble, regional sandstone, and absolute granite masterworks for luxury residences, meditative spaces, and grand architectural temples."
+        title="Sudarshan Crafts | Custom Stone Sculptures & Premium Hindu Deity Idols"
+        description="Discover Sudarshan Crafts by Master Sculptor Shri Sudarshan Sahoo. We create premium handcrafted Hindu deity stone sculptures and custom statues in marble, sandstone, and granite, preserving traditional Odisha temple architecture."
         schema={{
           "@context": "https://schema.org",
           "@graph": [
@@ -48,7 +48,7 @@ function MainWebsite() {
               "name": "Sudarshan Crafts",
               "image": "https://www.sudarshancrafts.com/images/sudarshan-sahoo.avif",
               "url": "https://www.sudarshancrafts.com/",
-              "description": "Premium handcrafted Hindu deity stone sculptures by Padma Vibhushan Shri Sudarshan Sahoo.",
+              "description": "Premium handcrafted Hindu deity stone sculptures and traditional Odisha stone carvings by Padma Vibhushan Master Craftsman Shri Sudarshan Sahoo.",
               "founder": {
                 "@type": "Person",
                 "name": "Shri Sudarshan Sahoo"
@@ -64,7 +64,7 @@ function MainWebsite() {
               "@type": "WebPage",
               "@id": "https://www.sudarshancrafts.com/#webpage",
               "url": "https://www.sudarshancrafts.com/",
-              "name": "Sudarshan Crafts | Premium Hindu Deity Stone Sculptures & Luxury Art Atelier",
+              "name": "Sudarshan Crafts | Custom Stone Sculptures & Premium Hindu Deity Idols",
               "isPartOf": {
                 "@id": "https://www.sudarshancrafts.com/#website"
               }

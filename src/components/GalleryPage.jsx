@@ -12,14 +12,14 @@ export default function GalleryPage() {
   return (
     <div className="relative bg-brand-bg">
       <SEO 
-        title="Sudarshan Crafts Gallery | Masterpiece Stone Sculptures"
-        description="Explore our exclusive gallery of premium stone sculptures. From majestic Ganesha idols to intricate sandstone temple art, crafted by Odisha's master artisans."
+        title="Sudarshan Crafts Gallery | Custom Hindu God Statues & Masterpiece Sculptures"
+        description="Explore our exclusive gallery of premium handcrafted stone sculptures and custom Hindu God statues. From majestic Ganesha idols to intricate traditional art, crafted by Odisha's master artisans."
         url="https://www.sudarshancrafts.com/gallery"
         schema={{
           "@context": "https://schema.org",
           "@type": "ImageGallery",
           "name": "Sudarshan Crafts Sculpture Gallery",
-          "description": "Gallery of premium handcrafted Hindu deity stone sculptures.",
+          "description": "Gallery of premium handcrafted Hindu deity stone sculptures and traditional Odisha stone carvings.",
           "url": "https://www.sudarshancrafts.com/gallery"
         }}
       />

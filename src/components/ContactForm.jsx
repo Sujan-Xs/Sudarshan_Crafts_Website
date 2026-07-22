@@ -11,6 +11,7 @@ export default function ContactForm() {
     countryCode: '+91',
     phone: '',
     email: '',
+    contactMethod: 'Email',
     description: '',
   });
 
@@ -61,7 +62,7 @@ export default function ContactForm() {
         full_name: formData.fullName,
         phone: `${formData.countryCode} ${formData.phone}`,
         email: formData.email,
-        description: formData.description
+        description: `[Contact via: ${formData.contactMethod}]\n${formData.description}`
       });
 
       // 2. Send Email via Web3Forms
@@ -74,7 +75,7 @@ export default function ContactForm() {
           name: formData.fullName,
           email: formData.email,
           phone: `${formData.countryCode} ${formData.phone}`,
-          message: formData.description
+          message: `Contact via: ${formData.contactMethod}\n\n${formData.description}`
         };
 
         const res = await fetch("https://api.web3forms.com/submit", {
@@ -107,6 +108,7 @@ export default function ContactForm() {
       countryCode: '+91',
       phone: '',
       email: '',
+      contactMethod: 'Email',
       description: '',
     });
     setFormSubmitted(false);
@@ -250,6 +252,31 @@ export default function ContactForm() {
                         className="bg-transparent border-b border-brand-sand/20 focus:border-brand-bronze focus:outline-none pb-2 text-sm text-white font-light transition-colors duration-300"
                         placeholder="e.g., yourname@email.com"
                       />
+                    </div>
+
+                    {/* Contact Preference input */}
+                    <div className="flex flex-col space-y-4 pt-4">
+                      <label className="text-sm text-brand-sand font-normal">I'd like to be contacted via</label>
+                      <div className="flex flex-wrap gap-8 items-center">
+                        {['Email', 'Phone Call', 'Either is fine'].map((method) => (
+                          <label key={method} className="flex items-center space-x-3 cursor-pointer group">
+                            <div className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center transition-colors ${formData.contactMethod === method ? 'border-[#C85A32]' : 'border-brand-grey/50 group-hover:border-[#C85A32]/60'}`}>
+                              {formData.contactMethod === method && (
+                                <div className="w-[10px] h-[10px] rounded-full bg-[#C85A32]" />
+                              )}
+                            </div>
+                            <span className="text-sm text-white font-light">{method}</span>
+                            <input
+                              type="radio"
+                              name="contactMethod"
+                              value={method}
+                              checked={formData.contactMethod === method}
+                              onChange={handleInputChange}
+                              className="hidden"
+                            />
+                          </label>
+                        ))}
+                      </div>
                     </div>
 
                     {/* Description input */}
